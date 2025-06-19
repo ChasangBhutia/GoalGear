@@ -10,7 +10,7 @@ router.get('/', (req, res)=>{
 
 router.get('/all-products', getAllProducts)
 
-router.post('/create-product',upload.single('image'), isLoggedIn, isAdmin, createProduct);
+router.post('/create-product', isLoggedIn, isAdmin, upload.single('image'), createProduct);
 router.get('/delete-product/:productId', isLoggedIn, isAdmin, deleteProduct);
 
 

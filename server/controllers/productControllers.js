@@ -3,6 +3,7 @@ const fs = require('fs');
 const productModel = require("../models/product-model");
 const ownerModel = require("../models/owner-model");
 const path = require('path');
+const { inflateRaw } = require('zlib');
 
 module.exports.getAllProducts = async(req, res)=>{
   let products = await productModel.find();
@@ -17,6 +18,7 @@ module.exports.createProduct = async (req, res) => {
         return res.json({ success: false, message: "All fields are required." })
     }
     let owner = await ownerModel.findOne({ email: req.user.email });
+    
     let product = await productModel.create({
         name,
         price,
