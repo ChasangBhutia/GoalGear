@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser, loginUser, logout } = require('../controllers/authControllers');
+const { registerUser, login, logout } = require('../controllers/authControllers');
 const router = express.Router();
 
 router.get('/', (req, res)=>{
@@ -7,7 +7,7 @@ router.get('/', (req, res)=>{
 })
 
 router.post('/register', registerUser);
-router.post('/login', loginUser);
+router.post('/login', login);
 router.get('/logout', logout);
 
 

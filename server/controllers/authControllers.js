@@ -4,12 +4,14 @@ const ownerModel= require('../models/owner-model');
 const userModel = require('../models/user-model');
 const { generateToken } = require('../utils/generateToken');
 
-module.exports.registerUser = (req, res) => {
+module.exports.registerUser = async (req, res) => {
     const { fullname, email, password } = req.body;
     
     if (!fullname || !email || !password) {
         return res.json({ success: false, message: "All fields are required" })
     }
+    let user = await userModel.findOne({email});
+    if(user) return res.json({success:false, message:"Account already exist! Please Login"});
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, async (err, hash) => {
             let user = await userModel.create({
@@ -25,7 +27,7 @@ module.exports.registerUser = (req, res) => {
 
 }
 
-module.exports.loginUser = async (req, res) => {
+module.exports.login = async (req, res) => {
     const {email, password} = req.body;
     if(!email || !password){
         return res.json({success:false, message:"All fields are required"});
