@@ -26,6 +26,5 @@ module.exports.removeFromCart = async (req, res)=>{
         {$pull: {cart: {_id:cartId}}},
         {new:true}
     )
-
     res.json({success:true, message:"Product removed from cart"});
 }

@@ -11,7 +11,7 @@ router.get('/', (req, res)=>{
 router.get('/all-products', getAllProducts)
 
 router.post('/create-product', isLoggedIn, isAdmin, upload.single('image'), createProduct);
-router.get('/delete-product/:productId', isLoggedIn, isAdmin, deleteProduct);
+router.delete('/delete-product/:productId', isLoggedIn, isAdmin, deleteProduct);
 
 
 module.exports = router;

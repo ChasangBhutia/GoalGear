@@ -3,7 +3,7 @@ const fs = require('fs');
 const productModel = require("../models/product-model");
 const ownerModel = require("../models/owner-model");
 const path = require('path');
-const { inflateRaw } = require('zlib');
+
 
 module.exports.getAllProducts = async(req, res)=>{
   let products = await productModel.find();
