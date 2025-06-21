@@ -20,7 +20,7 @@ const Navbar = () => {
 
     return (
         <nav className='flex justify-between items-center lg:px-12 md:px-7 h-[8vh] px-1 sm:px-7'>
-            <h1 className='text-2xl font-semibold'>GoalGear</h1>
+            <h1 className='text-2xl font-semibold' style={{fontFamily:'"Joti One", serif'}}>GoalGear</h1>
              
             <ul className={`${smallScreen} ${largeScreen} ${menuClicked ? 'left-0 ' : 'left-180 sm:left-200'} `}>
                

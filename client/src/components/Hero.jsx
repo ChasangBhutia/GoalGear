@@ -5,18 +5,20 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 const Hero = () => {
   return (
     <div className='z- h-[92vh] overflow-hidden bg-[#FFEFEF] flex flex-col items-center'>
-      <div className='flex justify-center gap-10 h-[80vh] pt-20'>
-        <section className='pt-20'>
-        <h1 className='uppercase text-5xl font-semibold mb-5'>Gear Up Like A Pro</h1>
-        <h3 className='mb-2 text-xl'>Shop Authentic Football Kits From Top Clubs & National Teams</h3>
-        <h3 className='mb-2 text-xl'>Quality. Comfort. Passion.</h3>
+      <div className='flex justify-center w-full px-60 h-[80vh] pt-8'>
+        <section className='pt-30 flex-1'>
+        <h1 className='uppercase text-5xl font-semibold mb-5' style={{fontFamily:'"Babas Neue", sans-serif'}}>Gear Up Like A Pro</h1>
+        <h3 className='mb-2 text-2xl font-light' style={{fontFamily:'"Poppins", sans-serif'}}>Shop Authentic Football Kits From Top Clubs & National Teams</h3>
+        <h3 className='mb-2 text-2xl font-light' style={{fontFamily:'"Poppins", sans-serif'}}>Quality. Comfort. Passion.</h3>
         <a href="#newlyAdded">
-          <button className='w-2/3 h-10 rounded-lg mt-20 bg-yellow-500'>Explore</button>
+          <button className='w-2/3 h-10 rounded-lg mt-10 bg-[#F6E20C] font-semibold'>Explore</button>
         </a>
       </section>
-      <section>
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#C48CD9" transform="translate(100 100)">
+      <section className='flex-1 relative'>
+        <div className='h-[200vh] w-[50vw] absolute top-[-120px] left-30 bg-[#C91EF9] rotate-30'></div>
+        {/* <article >
+           <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#C91EF9" transform="translate(100 100)">
             <animate
               attributeName='d'
               dur="20s"
@@ -30,10 +32,11 @@ const Hero = () => {
             </animate>
           </path>
         </svg>
-        <img className='relative bottom-120 rotate-90' src={heroImg} alt="" />
+        </article> */}
+        <img className='absolute top-15 left-10' src={heroImg} alt="" />
       </section>
       </div>
-      <KeyboardDoubleArrowDownIcon fontSize='large'/>
+      <KeyboardDoubleArrowDownIcon className='z-99 text-zinc-900' sx={{fontSize:'60px'}}/>
     </div>
   )
 }
