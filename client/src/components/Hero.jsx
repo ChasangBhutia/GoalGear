@@ -1,24 +1,25 @@
 import React from 'react'
 import heroImg from '../assets/hero.png';
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
 const Hero = () => {
   return (
-    <div className='z-10 h-[92vh]'>
-      <div className='flex'>
-        <section className="">
-        <h1 className='uppercase'>Gear Up Like A Pro</h1>
-        <h3>Shop Authentic Football Kits From Top Clubs & National Teams</h3>
-        <h3>Quality. Comfort. Passion.</h3>
+    <div className='z- h-[92vh] overflow-hidden bg-[#FFEFEF] flex flex-col items-center'>
+      <div className='flex justify-center gap-10 h-[80vh] pt-20'>
+        <section className='pt-20'>
+        <h1 className='uppercase text-5xl font-semibold mb-5'>Gear Up Like A Pro</h1>
+        <h3 className='mb-2 text-xl'>Shop Authentic Football Kits From Top Clubs & National Teams</h3>
+        <h3 className='mb-2 text-xl'>Quality. Comfort. Passion.</h3>
         <a href="#newlyAdded">
-          <button>Explore</button>
+          <button className='w-2/3 h-10 rounded-lg mt-20 bg-yellow-500'>Explore</button>
         </a>
       </section>
       <section>
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#FF9066" transform="translate(100 100)">
+          <path fill="#C48CD9" transform="translate(100 100)">
             <animate
               attributeName='d'
-              dur="30s"
+              dur="20s"
               repeatCount="indefinite"
               values="M38.5,-57.9C52.2,-51.1,67.2,-44.3,72.6,-33C78,-21.7,73.7,-5.9,69.4,8.5C65,22.9,60.6,35.8,53.2,48.3C45.8,60.9,35.4,73.1,21.8,79.5C8.2,86,-8.7,86.6,-20.8,79.2C-32.8,71.8,-40,56.4,-52.1,44.2C-64.2,32,-81.1,23.1,-87.9,9.5C-94.7,-4,-91.4,-22.1,-82.4,-35.9C-73.4,-49.7,-58.7,-59.1,-44.1,-65.5C-29.4,-71.9,-14.7,-75.1,-1.1,-73.4C12.4,-71.6,24.8,-64.8,38.5,-57.9Z;
               M36.2,-63.7C44.2,-51.3,45.9,-36.5,54.3,-23.3C62.6,-10,77.7,1.7,79.5,13.7C81.2,25.7,69.6,38,58.8,51.6C48,65.2,37.9,80,25,82.6C12.1,85.2,-3.6,75.6,-15.5,66.1C-27.5,56.6,-35.6,47.2,-46.7,38.3C-57.9,29.4,-72.2,20.9,-73.8,10.5C-75.4,0.2,-64.4,-12.1,-57.7,-26.2C-51,-40.3,-48.7,-56.2,-39.8,-68.1C-30.9,-80.1,-15.4,-88,-0.6,-87C14.2,-86,28.3,-76.1,36.2,-63.7Z;
@@ -29,9 +30,10 @@ const Hero = () => {
             </animate>
           </path>
         </svg>
-        <img src={heroImg} alt="" />
+        <img className='relative bottom-120 rotate-90' src={heroImg} alt="" />
       </section>
       </div>
+      <KeyboardDoubleArrowDownIcon fontSize='large'/>
     </div>
   )
 }
