@@ -48,7 +48,7 @@ const Navbar = () => {
             </ul>
             <section className=' flex items-center lg:gap-5 md:gap-2 text-lg'>
                 <Link to='/cart' className='mr-1'><ShoppingBagOutlinedIcon/></Link>
-                <Link to='/profile'>
+                <Link to='/login'>
                     <section className='flex items-center bg-yellow-200 px-2 py-1 rounded-3xl w-fit'>
                         <button className='mr-2'>User</button>
                         <img className='bg-red-300 h-[25px] w-[25px] rounded-[100%]' src="img.png" alt="" />
