@@ -4,7 +4,7 @@ import { Squash as Hamburger } from 'hamburger-react'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
 
-const Navbar = () => {
+function Navbar(){
 
     const [menuClicked, setMenuClicked] = useState(false);
     function handleMenuClick() {

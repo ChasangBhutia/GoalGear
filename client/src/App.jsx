@@ -4,6 +4,9 @@ import "./App.css";
 import Navbar from './components/Navbar';
 import Shop from './pages/Shop';
 import LoginSignup from './pages/LoginSignup';
+import CreateProduct from './pages/CreateProduct';
+
+
 
 const App = () => {
   return (
@@ -13,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path='/login' element={<LoginSignup/>}/>
           <Route path='/' element={<Shop/>}/>
+          <Route path='/admin/create-product' element={<CreateProduct/>}/>
         </Routes>
       </div>
     </BrowserRouter>

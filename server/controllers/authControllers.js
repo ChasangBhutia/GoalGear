@@ -11,7 +11,7 @@ module.exports.registerUser = async (req, res) => {
         return res.json({ success: false, message: "All fields are required" })
     }
     let user = await userModel.findOne({email});
-    if(user) return res.json({success:false, message:"Account already exist! Please Login"});
+    if(user) return res.json({success:false, message:"Account already exist! Please Login", accountExist:true});
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, async (err, hash) => {
             let user = await userModel.create({
@@ -27,7 +27,7 @@ module.exports.registerUser = async (req, res) => {
 
 }
 
-module.exports.login = async (req, res) => {
+module.exports.login = async (req, res) => {    
     const {email, password} = req.body;
     if(!email || !password){
         return res.json({success:false, message:"All fields are required"});
@@ -40,11 +40,11 @@ module.exports.login = async (req, res) => {
     }
     
     if(!user){
-        return res.json({success:false, message:"User do not exist."});
+        return res.json({success:false, message:"User do not exist.", accountExist:false});
     }
     bcrypt.compare(password, user.password, (err, result)=>{
         if(!result){
-            return res.json({success:false, message:"Something went wrong!"})
+            return res.json({success:false, message:"Password Wrong!"})
         }else{
             let token = generateToken(user.email, role);
             res.cookie("token", token);
