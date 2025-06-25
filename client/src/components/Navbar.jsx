@@ -47,7 +47,7 @@ function Navbar(){
                 </li>
             </ul>
             <section className=' flex items-center lg:gap-5 md:gap-2 text-lg'>
-                <Link to='/cart' className='mr-1'><ShoppingBagOutlinedIcon/></Link>
+                <Link to='/cart' className='mr-1 relative flex items-center'><span className='text-sm absolute left-3 top-2 mt-[3px] ml-[1.4px] '>0</span><ShoppingBagOutlinedIcon sx={{fontSize:"35px"}}/></Link>
                 <Link to='/login'>
                     <section className='flex items-center bg-yellow-200 px-2 py-1 rounded-3xl w-fit'>
                         <button className='mr-2'>User</button>
