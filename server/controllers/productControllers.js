@@ -12,6 +12,13 @@ module.exports.getAllProducts = async(req, res)=>{
   res.json({success:true, message:"All Products found", products});
 }
 
+module.exports.getProduct = async(req, res)=>{
+  const {productId} = req.params;
+  let product = await productModel.findOne({_id:productId});
+  if(!product) return res.json({success:false, message:"Product not found"});
+  res.json({success:true, message:"Product Found", product});
+}
+
 module.exports.createProduct = async (req, res) => {
     const { name, price, discount, category } = req.body;
     if (!name || !price || !discount || !category) {

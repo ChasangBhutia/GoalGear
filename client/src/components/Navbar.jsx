@@ -28,22 +28,22 @@ function Navbar(){
                     <Link to='/'>Home</Link>
                 </li>
                 <li>
-                    <Link to='/jerseys'>Jerseys</Link>
+                    <Link to='/category/jerseys'>Jerseys</Link>
                 </li>
                 <li>
-                    <Link to='/boots'>Boots</Link>
+                    <Link to='/category/boots'>Boots</Link>
                 </li>
                 <li>
-                    <Link to='/gloves'>Gloves</Link>
+                    <Link to='/category/gloves'>Gloves</Link>
                 </li>
                 <li>
-                    <Link to='/bags'>Bags</Link>
+                    <Link to='/category/bags'>Bags</Link>
                 </li>
                 <li>
-                    <Link to='/socks'>Socks</Link>
+                    <Link to='/category/socks'>Socks</Link>
                 </li>
                 <li>
-                    <Link to='/guards'>Guards</Link>
+                    <Link to='/category/guards'>Guards</Link>
                 </li>
             </ul>
             <section className=' flex items-center lg:gap-5 md:gap-2 text-lg'>

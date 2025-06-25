@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 import Shop from './pages/Shop';
 import LoginSignup from './pages/LoginSignup';
 import CreateProduct from './pages/CreateProduct';
+import Category from './pages/Category';
+import Product from './pages/Product';
 
 
 
@@ -17,6 +19,8 @@ const App = () => {
           <Route path='/login' element={<LoginSignup/>}/>
           <Route path='/' element={<Shop/>}/>
           <Route path='/admin/create-product' element={<CreateProduct/>}/>
+          <Route path="/category/:type" element={<Category/>}/>
+          <Route path="/product/:productId" element={<Product/>}/>
         </Routes>
       </div>
     </BrowserRouter>
