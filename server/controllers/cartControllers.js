@@ -2,6 +2,12 @@ const productModel = require('../models/product-model');
 const userModel = require('../models/user-model');
 
 
+module.exports.getCart = async (req,res)=>{
+    const user = await userModel.findOne({email:req.user.email}).populate('cart.product');
+    if(!user) return res.json({success:false, message:"User not found"});
+    res.json({success:true, message:"Cart found", cart:user.cart});
+}
+
 module.exports.addToCart = async (req, res) => {
     const {productId} = req.params;
     const {quantity, size} = req.body;

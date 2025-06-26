@@ -1,28 +1,63 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useCart } from '../context/CartContext'
 
-const ProductDisplay = ({product}) => {
+const ProductDisplay = ({ product }) => {
+
+  const {setRefreshCart} = useCart();
+  const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1)
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  const handleSizeClick = (size) => {
+    setSelectedSize(size);
+  };
+
+  const AddToCart = async ()=>{
+    const productId = product._id;
+    const data = {
+      quantity,
+      size:selectedSize
+    }
+    try{
+      let response = await axios.post(`http://localhost:3000/user/add-to-cart/${productId}`, data, {
+        withCredentials: true
+      })
+      alert(response.data.message);
+      if(response.data.success){
+        setRefreshCart((prev)=>({
+          ...prev+1
+        }))
+        navigate('/cart');
+      }
+    }catch(err){
+      console.log(err.message);
+    }
+    
+
+  }
+
+
   return (
     <article className='h-90 w-180 m-auto flex gap-2 mt-20'>
       <img className='rounded-lg h-full w-1/2' src={`http://localhost:3000/uploads/${product.image}`} alt="" />
       <section className='flex flex-col gap-2'>
-          <h2 className='text-3xl font-semibold' style={{fontFamily:'"Poppins",sans-serif'}}>{product.name}</h2>
-          <p>Price: {product.price}</p>
-          <p>Discount: {product.discount}</p>
-          <h3>Size:</h3>
-          <section className='flex gap-2'>
-            <button className='bg-zinc-900 text-white h-12 w-12 rounded'>S</button>
-            <button className='bg-zinc-900 text-white h-12 w-12 rounded'>M</button>
-            <button className='bg-zinc-900 text-white h-12 w-12 rounded'>L</button>
-            <button className='bg-zinc-900 text-white h-12 w-12 rounded'>XL</button>
-            <button className='bg-zinc-900 text-white h-12 w-12 rounded'>XXL</button>
-          </section>
-          <h3>Quantity: </h3>
-          <section className='flex gap-2'>
-            <button className='text-2xl'>-</button>
-            <button className='outline h-12 w-12 rounded text-xl'>{1}</button>
-            <button className='text-2xl'>+</button>
-          </section>
-          <button className='bg-[#F6E20C] h-10 rounded-lg'>Add To Cart</button>
+        <h2 className='text-3xl font-semibold' style={{ fontFamily: '"Poppins",sans-serif' }}>{product.name}</h2>
+        <p>Price: {product.price}</p>
+        <p>Discount: {product.discount}</p>
+        <h3>Size:</h3>
+        <section className='flex gap-2'>
+          {sizes.map((size, index) => {
+            return <button key={index} className={`bg-zinc-900 text-white h-12 w-12 rounded ${selectedSize === size ? 'ring-2 ring-white' : ''}`}
+              onClick={() => handleSizeClick(size)}>{size}</button>
+          })}
+        </section>
+        <h3>Quantity: </h3>
+
+        <input className='outline h-12 w-12 rounded text-xl text-center' type='number' onChange={(e)=>setQuantity(e.target.value)} value={quantity} />
+        <button className='bg-[#F6E20C] h-10 rounded-lg' onClick={AddToCart}>Add To Cart</button>
       </section>
     </article>
   )
