@@ -8,6 +8,9 @@ import CreateProduct from './pages/CreateProduct';
 import Category from './pages/Category';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
+import AdminRoutes from './utils/AdminRoutes';
+import UserRoutes from './utils/UserRoutes';
+import ProtectedRoutes from './utils/ProtectedRoutes';
 
 
 
@@ -15,13 +18,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className='h-full overflow-hidden'>
-        <Navbar/>
+        <ProtectedRoutes><Navbar/></ProtectedRoutes>
         <Routes>
           <Route path='/login' element={<LoginSignup/>}/>
           <Route path='/' element={<Shop/>}/>
-          <Route path='/admin/create-product' element={<CreateProduct/>}/>
+          <Route path='/admin/create-product' element={<AdminRoutes><CreateProduct/></AdminRoutes>}/>
           <Route path="/category/:type" element={<Category/>}/>
-          <Route path="/product/:productId" element={<Product/>}/>
+          <Route path="/product/:productId" element={<UserRoutes><Product/></UserRoutes>}/>
           <Route path="/cart" element={<Cart/>}/>
         </Routes>
       </div>

@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion';
-import backgroundTheme from '../assets/backgroundTheme.png'
-import field from '../assets/field.png'
 import juggling from '../assets/juggling.gif'
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
