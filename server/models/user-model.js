@@ -4,7 +4,10 @@ const userSchema = new mongoose.Schema({
     fullname: String,
     email: String,
     password: String,
-    image: String,
+    image: {
+        type:String,
+        default:'defaultUserProfilePic.jpg'
+    },
     cart: [
         {
             product: {
@@ -16,6 +19,9 @@ const userSchema = new mongoose.Schema({
                 default: 1,
             },
             size: String,
+            totalPrice:Number,
+            totalDiscount:Number,
+            
         }
     ],
     orders: {

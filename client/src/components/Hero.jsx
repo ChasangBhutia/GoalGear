@@ -16,7 +16,7 @@ const Hero = () => {
       </section>
       <section className='flex-1 relative'>
         <motion.div initial={{x:1500}} whileInView={{x:0}} transition={{duration:0.5}} className='h-[200vh] w-[50vw] absolute top-[-120px] left-30 bg-[#C91EF9] rotate-30'></motion.div>
-        <motion.img initial={{x:1500}} whileInView={{x:50}} transition={{duration:1, type:'spring', bounce:0.3}} className='absolute top-15 left-10' src={heroImg} alt="" />
+        <motion.img initial={{x:1200}} whileInView={{x:50}} transition={{duration:1, type:'spring', bounce:0.3}} className='absolute top-15 left-10' src={heroImg} alt="" />
       </section>
       </motion.div>
       <KeyboardDoubleArrowDownIcon className='text-zinc-900' sx={{fontSize:'60px'}}/>

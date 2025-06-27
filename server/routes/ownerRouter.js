@@ -1,10 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
-
+const {isLoggedIn, isAdmin} = require('../middleware/isLoggedIn');
 const {generateToken} = require('../utils/generateToken');
 const ownerModel = require('../models/owner-model');
-const { login } = require('../controllers/authControllers');
+const { getUser,login } = require('../controllers/authControllers');
 
 router.get('/', (req, res)=>{
     res.send("Its working");
@@ -31,5 +31,7 @@ router.post('/register-owner', (req,res)=>{
     })
 })
 router.post('/login', login);
+
+router.get('/get-user',isLoggedIn, isAdmin, getUser);
 
 module.exports = router;

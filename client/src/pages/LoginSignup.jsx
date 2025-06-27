@@ -18,6 +18,7 @@ const LoginSignup = () => {
         password:''
     }
     );
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e)=>{
         setUserData((prev)=>({
@@ -28,8 +29,7 @@ const LoginSignup = () => {
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        console.log(userData);
-        
+    
         const formData = new FormData();
         !haveAccount && formData.append('fullname', userData.fullname);
         formData.append('email', userData.email);
@@ -40,7 +40,7 @@ const LoginSignup = () => {
             let response = await axios.post(uri, formData, {
                 withCredentials:true,
             })
-            alert(response.data.message);
+            setErrorMessage(response.data.message);
             if(response.data.accountExist) setHaveAccount(true);
             if(response.data.success) navigate('/');
         }catch(err){
@@ -67,7 +67,8 @@ const LoginSignup = () => {
                     <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="password" name='password' onChange={handleChange} value={userData.password} placeholder='password' required/>
                     {haveAccount?<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value='Login' />:<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value='Create Account' />}
                 </form>
-                <button className='mt-10 z-99' onClick={() => setHaveAccount(!haveAccount)}>{haveAccount ? "Don't have an account? Create" : "Already Registered? Login"}</button>
+                <p className='text-center text-red-500'>{errorMessage}</p>
+                <button className='mt-7 z-99' onClick={() => setHaveAccount(!haveAccount)}>{haveAccount ? "Don't have an account? Create" : "Already Registered? Login"}</button>
 
             </motion.section>
         </div>

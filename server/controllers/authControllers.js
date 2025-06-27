@@ -57,3 +57,14 @@ module.exports.logout = (req, res) => {
     res.clearCookie('token');
     res.json({message:"Logged Out"});
 }
+
+module.exports.getUser = async(req,res)=>{
+    let user = await userModel.findOne({email:req.user.email});
+    if(user){
+        return res.json({success:true, message:"User found", user});
+    }else{
+        user = await ownerModel.findOne({email:req.user.email});
+        if(user) return res.json({success:true, message:"User found", user});
+        else return res.json({success:false,message:"User not found"});
+    }
+}

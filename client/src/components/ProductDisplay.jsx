@@ -10,7 +10,7 @@ const ProductDisplay = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
   const [selectedSize, setSelectedSize] = useState(null);
 
-  const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  const sizes = product.category === 'boots' ? ['34','36','38','40','42','44'] : ['S','M','L','XL','XXL'] ;
   const handleSizeClick = (size) => {
     setSelectedSize(size);
   };
@@ -45,8 +45,12 @@ const ProductDisplay = ({ product }) => {
       <img className='rounded-lg h-full w-1/2' src={`http://localhost:3000/uploads/${product.image}`} alt="" />
       <section className='flex flex-col gap-2'>
         <h2 className='text-3xl font-semibold' style={{ fontFamily: '"Poppins",sans-serif' }}>{product.name}</h2>
-        <p>Price: {product.price}</p>
-        <p>Discount: {product.discount}</p>
+       <section>
+         <p className={`inline mr-4 ${product.discount>0 && 'line-through'}`}>Price: ₹{product.price}</p>
+        <p className='inline'>Discount: ₹{product.discount}</p>
+       </section>
+       {product.discount>0 && <p>Final Price: ₹{product.price - product.discount}</p> }
+        
         <h3>Size:</h3>
         <section className='flex gap-2'>
           {sizes.map((size, index) => {

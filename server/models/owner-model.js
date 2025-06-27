@@ -4,7 +4,10 @@ const ownerSchema = new mongoose.Schema({
     fullname: String,
     email: String,
     password: String,
-    image: String,
+    image: {
+        type:String,
+        default:'defaultUserProfilePic.jpg'
+    },
     products: [
         {
             type: mongoose.Schema.Types.ObjectId,

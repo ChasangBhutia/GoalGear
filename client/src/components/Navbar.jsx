@@ -1,10 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Squash as Hamburger } from 'hamburger-react'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import {useCart} from '../context/CartContext'
+import axios from 'axios';
 
-const Navbar = ({user})=>{
+const Navbar = ()=>{
+    const [user, setUser] = useState({});
+    useEffect(()=>{
+        const getUser = async()=>{
+            let response = await axios.get('http://localhost:3000/user/get-user',{
+                withCredentials:true
+            })
+            if(response.data.success){
+                setUser(response.data.user);
+            }
+        }
+        getUser();
+    },[]);    
 
     const {cartQuantity} = useCart();
     const [menuClicked, setMenuClicked] = useState(false);
@@ -51,8 +64,8 @@ const Navbar = ({user})=>{
                 <Link to='/cart' className='mr-1 relative flex items-center'><span className='text-sm absolute left-3 top-2 mt-[3px] ml-[1.4px] '>{cartQuantity}</span><ShoppingBagOutlinedIcon sx={{fontSize:"35px"}}/></Link>
                 <Link to='/login'>
                     <section className='flex items-center bg-yellow-200 px-2 py-1 rounded-3xl w-fit'>
-                        <button className='mr-2'>{user.email}</button>
-                        <img className='bg-red-300 h-[25px] w-[25px] rounded-[100%]' src="img.png" alt="" />
+                        <button className='mr-2'>{user.fullname}</button>
+                        <img className='bg-red-300 h-[25px] w-[25px] rounded-[100%]' src={`http://localhost:3000/uploads/defaultUserProfilePic.jpg`} alt="" />
                     </section>
                 </Link>
                  <button className='md:hidden h-fit w-fit' onClick={handleMenuClick}>
