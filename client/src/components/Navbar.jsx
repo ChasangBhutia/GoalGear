@@ -1,85 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Squash as Hamburger } from 'hamburger-react'
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-import {useCart} from '../context/CartContext'
-import axios from 'axios';
+import React from 'react'
+import './styles/style.css'
 
-const Navbar = ()=>{
-    const [user, setUser] = useState({});
-    useEffect(()=>{
-        const getUser = async()=>{
-            let response = await axios.get('http://localhost:3000/user/get-user',{
-                withCredentials:true
-            })
-            if(response.data.success){
-                setUser(response.data.user);
-            }
-        }
-        getUser();
-    },[]);    
-
-    const {cartQuantity} = useCart();
-    const [menuClicked, setMenuClicked] = useState(false);
-    function handleMenuClick() {
-        if (menuClicked) setMenuClicked(false)
-        else setMenuClicked(true);
-    }
-    const smallScreen = `pt-10 bg-red-200 h-screen
-    z-99 w-full flex flex-col fixed bottom-[-8vh]
-    text-center duration-800 gap-6 mt-95 text-lg sm:flex-col`
-
-    const largeScreen = `md:pt-0 md:bg-transparent md:h-fit md:w-auto md:duration-0
-    md:static md:flex-row md:text-[16px] md:mt-0 lg:gap-10 md:gap-5 lg:text-lg`;
-
-    return (
-        <nav className='flex justify-between items-center lg:px-12 md:px-7 h-[8vh] px-1 sm:px-7'>
-            <h1 className='text-2xl font-semibold' style={{fontFamily:'"Joti One", serif'}}>GoalGear</h1>
-             
-            <ul className={`${smallScreen} ${largeScreen} ${menuClicked ? 'left-0 ' : 'left-180 sm:left-200'} `}>
-               
-                <li >
-                    <Link to='/'>Home</Link>
-                </li>
-                <li>
-                    <Link to='/category/jerseys'>Jerseys</Link>
-                </li>
-                <li>
-                    <Link to='/category/boots'>Boots</Link>
-                </li>
-                <li>
-                    <Link to='/category/gloves'>Gloves</Link>
-                </li>
-                <li>
-                    <Link to='/category/bags'>Bags</Link>
-                </li>
-                <li>
-                    <Link to='/category/socks'>Socks</Link>
-                </li>
-                <li>
-                    <Link to='/category/guards'>Guards</Link>
-                </li>
-            </ul>
-            <section className=' flex items-center lg:gap-5 md:gap-2 text-lg'>
-                <Link to='/cart' className='mr-1 relative flex items-center'><span className='text-sm absolute left-3 top-2 mt-[3px] ml-[1.4px] '>{cartQuantity}</span><ShoppingBagOutlinedIcon sx={{fontSize:"35px"}}/></Link>
-                <Link to='/login'>
-                    <section className='flex items-center bg-yellow-200 px-2 py-1 rounded-3xl w-fit'>
-                        <button className='mr-2'>{user.fullname}</button>
-                        <img className='bg-red-300 h-[25px] w-[25px] rounded-[100%]' src={`http://localhost:3000/uploads/defaultUserProfilePic.jpg`} alt="" />
-                    </section>
-                </Link>
-                 <button className='md:hidden h-fit w-fit' onClick={handleMenuClick}>
-                    <span className='sm:hidden'>
-                        <Hamburger duration={0.7} size={22}/>
-                    </span>
-                    <span className='hidden sm:block'>
-                     <Hamburger duration={0.7}/>
-                    </span>
-                </button>
-            </section>
-           
-        </nav>
-    )
+const Navbar = () => {
+  return (
+    <nav className='flex justify-between pb-4 px-15'>
+        <ul className='flex gap-6 mt-5 w-1/3'>
+            <li>Home</li>
+            <li>Boots</li>
+            <li>Jerseys</li>
+            <li>Gloves</li>
+            <li>Bags</li>
+        </ul>
+        <section className='logoContainer w-1/3 bg-white'>
+            <div className="shape">
+            <h1 className='text-3xl' style={{fontFamily:'Joti One'}}>GoalGear</h1>
+            </div>
+        </section>
+        <ul className='flex gap-6 mt-5 w-1/3 justify-end'>
+            <li>Socks</li>
+            <li>Guards</li>
+            <li>
+                <button>Login/Signup</button>
+                <img src="" alt="" />
+            </li>
+        </ul>
+    </nav>
+  )
 }
 
 export default Navbar

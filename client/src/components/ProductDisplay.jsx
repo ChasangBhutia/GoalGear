@@ -54,7 +54,7 @@ const ProductDisplay = ({ product }) => {
         <h3>Size:</h3>
         <section className='flex gap-2'>
           {sizes.map((size, index) => {
-            return <button key={index} className={`bg-zinc-900 text-white h-12 w-12 rounded ${selectedSize === size ? 'ring-2 ring-white' : ''}`}
+            return <button key={index} className={`${selectedSize === size ? 'bg-[#F6E20C] text-black': 'bg-zinc-900 text-white'} font-semibold h-12 w-12 rounded`}
               onClick={() => handleSizeClick(size)}>{size}</button>
           })}
         </section>

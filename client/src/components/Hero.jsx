@@ -1,25 +1,33 @@
-import {motion} from 'framer-motion';
-import heroImg from '../assets/hero.png';
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import React from 'react'
+import Navbar from './Navbar'
+import ronaldoImg from "../assets/ronaldoHero.png";
 
 const Hero = () => {
   return (
-    <div className='z- h-[92vh] overflow-hidden bg-[#FFEFEF] flex flex-col items-center'>
-      <motion.div initial={{x:-800}} whileInView={{x:0}} transition={{duration:1, type:'spring', bounce:0.3}} className='flex justify-center w-full px-60 h-[80vh] pt-8'>
-        <section className='pt-30 flex-1'>
-        <h1 className='uppercase text-5xl font-semibold mb-5' style={{fontFamily:'"Babas Neue", sans-serif'}}>Gear Up Like A Pro</h1>
-        <h3 className='mb-2 text-2xl font-light' style={{fontFamily:'"Poppins", sans-serif'}}>Shop Authentic Football Kits From Top Clubs & National Teams</h3>
-        <h3 className='mb-2 text-2xl font-light' style={{fontFamily:'"Poppins", sans-serif'}}>Quality. Comfort. Passion.</h3>
-        <a href="#newlyAdded">
-          <button className='w-2/3 h-10 rounded-lg mt-10 bg-[#F6E20C] font-semibold'>Explore</button>
-        </a>
-      </section>
-      <section className='flex-1 relative'>
-        <motion.div initial={{x:1500}} whileInView={{x:0}} transition={{duration:0.5}} className='h-[200vh] w-[50vw] absolute top-[-120px] left-30 bg-[#C91EF9] rotate-30'></motion.div>
-        <motion.img initial={{x:1200}} whileInView={{x:50}} transition={{duration:1, type:'spring', bounce:0.3}} className='absolute top-15 left-10' src={heroImg} alt="" />
-      </section>
-      </motion.div>
-      <KeyboardDoubleArrowDownIcon className='text-zinc-900' sx={{fontSize:'60px'}}/>
+    <div className='h-screen w-full p-4'>
+        <div className='bg-gradient-to-b from-[#CBD6DA] to-[#F1FFFF] rounded-xl h-full w-full overflow-hidden'>
+          <Navbar/>
+          <section className='flex flex-col'>
+              <section className='w-full text-center h-1/3 pt-8'>
+                <h1 className='text-5xl mb-2 tracking-wider' style={{fontFamily:'"Bebas Neue'}}>Gear Up Like A Pro</h1>
+                <h3 className='text-xl font-light'>Shop Authentic Football Kits From Top Clubs & National Teams</h3>
+                <h3 className='text-xl font-light mb-2'>Quality. Comfort. Passion.</h3>
+                <article className='flex justify-center gap-2'>
+                  <button className='h-10 rounded-3xl w-50 bg-[#F6E20C]'>Shop Now</button>
+                  <button className='h-10 rounded-3xl w-50 bg-zinc-900 text-white'>Explore</button>
+                </article>
+              </section>
+              <section className='flex h-2/3'>
+                <aside className='flex-1'>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus asperiores rem mollitia minus. Consectetur eos debitis nobis voluptatibus ducimus cupiditate. Fugit earum ab sed debitis in officia, nemo saepe asperiores?</p>
+                </aside>
+                <aside className='flex-1 flex justify-center'>
+                  <img src={ronaldoImg} alt="" />
+                </aside>
+                <aside className='flex-1'></aside>
+              </section>
+          </section>
+        </div>      
     </div>
   )
 }

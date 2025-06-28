@@ -22,7 +22,7 @@ export const CartProvider = ({children})=>{
             });
             if(response.data.success){
                 getCartSummary(response.data.cart);
-                setCart(response.data.cart);
+                setCart(response.data.cart.reverse());
             }
         }
         fetchCart();

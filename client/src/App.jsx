@@ -18,7 +18,6 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className='h-full overflow-hidden'>
-        <ProtectedRoutes><Navbar/></ProtectedRoutes>
         <Routes>
           <Route path='/login' element={<LoginSignup/>}/>
           <Route path='/' element={<Shop/>}/>

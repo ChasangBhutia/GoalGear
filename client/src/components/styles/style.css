@@ -1,0 +1,34 @@
+.logoContainer{
+    height: 50px;
+    text-align: center;
+    position: relative;
+}
+
+.shape{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.shape::before{
+    content: '';
+    height: 110%;
+    width: 60px;
+    background-color: #CBD6DA;
+    position: absolute;
+    left: -1px;
+    clip-path: polygon(0% 0%, 0% 0%, 100% 100%, 0% 100%);
+}
+
+.shape::after{
+    content: '';
+    height: 110%;
+    width: 60px;
+    background-color: #CBD6DA;
+    position: absolute;
+    right: -1px;
+    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, -0% 100%);
+}
