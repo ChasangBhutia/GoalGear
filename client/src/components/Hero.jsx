@@ -6,8 +6,10 @@ import adidasLogo from '../assets/adidas.jpg';
 import nikeLogo from '../assets/nike.jpg';
 import pumaLogo from '../assets/puma.jpg';
 import niviaLogo from '../assets/nivia.jpg';
+import background from "../assets/background.png"
 import "./styles/style.css";
 import Typed from 'typed.js';
+
 
 const Hero = () => {
 
@@ -24,7 +26,8 @@ const Hero = () => {
 
   return (
     <div className='h-screen w-full p-4'>
-      <div className='bg-gradient-to-b from-[#CBD6DA] to-[#F1FFFF] rounded-xl h-full w-full overflow-hidden'>
+      <div className='rounded-xl h-full w-full overflow-hidden bg-[100vw, 100vh] bg-center' style={{backgroundImage:`url(${background})`}}>
+        <div className='bg-[rgba(0,0,0,0.1)]'>
         <Navbar />
         <section className='flex flex-col'>
           <section className='w-full text-center h-1/3 pt-5'>
@@ -33,9 +36,9 @@ const Hero = () => {
             <span className='text-5xl tracking-wider' style={{ fontFamily: '"Bebas Neue' }} ref={el}/>
           </section>
           <section className='flex h-2/3'>
-            <aside className='flex-1 pt-30 -20'>
+            <aside className='flex-1 pt-35 -20'>
               <p className='ms-10 w-90 text-lg mb-5'>We bring you authentic football kits from top clubs and national teams, designed for fans who live the game. Wear your passion. Represent your team. Play bold, feel unstoppable.</p>
-              <a href="#newlyAdded" className='ms-10'><button className='h-10 rounded-3xl w-70 bg-zinc-900 text-white'>Explore</button></a>
+              <a href="#featured" className='ms-10'><button className='h-10 rounded-3xl w-70 bg-zinc-900 text-white'>Explore</button></a>
             </aside>
             <aside className='flex-1 flex justify-center'>
               <motion.img className='ronaldoImg relative ' initial={{ bottom: '50px', opacity: 0.5 }} whileInView={{ bottom: 0, opacity: 1 }} transition={{ duration: 1 }} src={ronaldoImg} alt="" />
@@ -59,6 +62,7 @@ const Hero = () => {
             </aside>
           </section>
         </section>
+      </div>
       </div>
     </div>
   )

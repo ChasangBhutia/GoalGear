@@ -10,9 +10,6 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import AdminRoutes from './utils/AdminRoutes';
 import UserRoutes from './utils/UserRoutes';
-import ProtectedRoutes from './utils/ProtectedRoutes';
-
-
 
 const App = () => {
   return (

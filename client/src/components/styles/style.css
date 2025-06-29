@@ -1,38 +1,9 @@
-.logoContainer{
+.logoContainer {
     height: 50px;
+    width: 250px;
     text-align: center;
-    position: relative;
+    clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 100%);
 }
-
-.shape{
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.shape::before{
-    content: '';
-    height: 110%;
-    width: 60px;
-    background-color: #CBD6DA;
-    position: absolute;
-    left: -1px;
-    clip-path: polygon(0% 0%, 0% 0%, 100% 100%, 0% 100%);
-}
-
-.shape::after{
-    content: '';
-    height: 110%;
-    width: 60px;
-    background-color: #CBD6DA;
-    position: absolute;
-    right: -1px;
-    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, -0% 100%);
-}
-
 .logos{
     width: 100%;
     animation: 7s slide  infinite linear;
