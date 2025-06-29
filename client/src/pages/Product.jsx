@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import ProductDisplay from '../components/ProductDisplay'
-import SimilarProducts from '../components/SimilarProducts';
+import MenuBar from '../components/MenuBar';
 
 const Product = () => {
 
@@ -25,6 +25,7 @@ const Product = () => {
 
   return (
     <div>
+        <MenuBar/>
         <ProductDisplay product={product}/>
     </div>
   )
