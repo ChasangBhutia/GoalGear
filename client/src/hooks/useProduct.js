@@ -1,0 +1,67 @@
+import { useState, useEffect } from "react"
+import { getAllProducts, getProduct, createProduct, deleteProduct } from "../services/ProductServices";
+
+export const useProduct = (productId) => {
+    const [allProducts, setAllProducts] = useState([]);
+    const [product, setProduct] = useState({});
+    const [refreshProduct, setRefreshProduct] = useState(0);
+
+    // asign all products as an array 
+    useEffect(() => {
+        const getProducts = async () => {
+            try {
+                let response = await getAllProducts();
+                if (response.data.success) {
+                    setAllProducts(response.data.products.reverse());
+                }
+            } catch (err) {
+                console.log(err.message);
+            }
+        }
+        getProducts();
+    }, [refreshProduct]);
+
+    // get particular product
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                let response = await getProduct(productId);
+                if (response.data.success) {
+                    setProduct(response.data.product);
+                }
+            } catch (err) {
+                console.log(err.message);
+            }
+        }
+        fetchProduct();
+    }, [])
+
+    // Create product Only for admin
+    const createNewProduct = async (productData) => {
+        try {
+            let response = await createProduct(productData);
+            alert(response.data.message);
+            setRefreshProduct(refreshProduct + 1);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
+    // Delete product Only for admin
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                let response = await deleteProduct(productId);
+                if (response.data.success) {
+                    setProduct(response.data.product);
+                }
+            } catch (err) {
+                console.log(err.message);
+            }
+        }
+        fetchProduct();
+    }, [])
+
+
+    return { allProducts, product, createNewProduct }
+}

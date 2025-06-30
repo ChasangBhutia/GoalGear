@@ -4,15 +4,10 @@ const { getAllProducts, getProduct, createProduct, deleteProduct } = require('..
 const {isLoggedIn, isAdmin} = require('../middleware/isLoggedIn');
 const router = express.Router();
 
-router.get('/', (req, res)=>{
-    res.send("Its working");
-})
-
-router.get('/all-products',isLoggedIn, getAllProducts);
-router.get('/get-product/:productId', isLoggedIn, getProduct);
-
-router.post('/create-product', isLoggedIn, isAdmin, upload.single('image'), createProduct);
-router.delete('/delete-product/:productId', isLoggedIn, isAdmin, deleteProduct);
+router.get('/',isLoggedIn, getAllProducts);
+router.get('/:productId', isLoggedIn, getProduct);
+router.post('/', isLoggedIn, isAdmin, upload.single('image'), createProduct);
+router.delete('/:productId', isLoggedIn, isAdmin, deleteProduct);
 
 
 module.exports = router;

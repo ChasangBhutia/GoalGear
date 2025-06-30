@@ -18,7 +18,7 @@ const ProductDisplay = ({ product }) => {
       quantity,
       size:selectedSize
     }
-    addProduct(productId, data);
+    addProduct(data, productId);
   }
 
 

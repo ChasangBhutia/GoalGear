@@ -3,14 +3,16 @@ import './styles/style.css'
 import { Link } from 'react-router-dom'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import axios from 'axios';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
 
     const [user, setUser] = useState({});
+    const {cartQuantity} = useCart();
 
     useEffect(()=>{
         const getUser = async()=>{
-            let response = await axios.get('http://localhost:3000/user/get-user',{
+            let response = await axios.get('http://localhost:3000/api/user/get-user',{
                 withCredentials:true
             })
             if(response.data.success){
@@ -35,10 +37,13 @@ const Navbar = () => {
         <ul className='flex gap-10 mt-5 w-1/3 justify-end text-xl items-center'>
             <Link to="/category/socks"><li>Socks</li></Link>
             <Link to="/category/guards"><li>Guards</li></Link>
-            <Link to="/cart"><li><ShoppingBagOutlinedIcon/></li></Link>
+            <Link to="/cart"><li className='relative'>
+                <ShoppingBagOutlinedIcon fontSize='large'/>
+                <span className='absolute left-[13px] top-[12px] text-[15px]'>{cartQuantity}</span>
+            </li></Link>
             <section className='flex gap-2 items-center'>
                 <Link to="/login"><li>
-                <button className='bg-zinc-900 text-white p-2 rounded-4xl w-full text-sm'>{user.fullname}</button>
+                <button className='bg-zinc-900 text-white p-2 rounded-4xl w-30 text-sm'>Login</button>
             </li>
             </Link>
             <Link to="/profile"><li>

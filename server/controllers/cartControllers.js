@@ -11,6 +11,7 @@ module.exports.getCart = async (req,res)=>{
 module.exports.addToCart = async (req, res) => {
     const {productId} = req.params;
     const {quantity, size} = req.body;
+
     let product = await productModel.findById(productId);
     let totalPrice = quantity*product.price;
     let totalDiscount = quantity*product.discount;
@@ -22,8 +23,9 @@ module.exports.addToCart = async (req, res) => {
         totalDiscount
     }
     if(!product) return res.json({success:false, message:"Item not found!"});
-    let user = await userModel.findOne({email:req.user.email});
+    let user = await userModel.findOne({email:req.user.email}).populate('cart.product');
     if(!user) return res.json({success:false, message:"Please Login first"});
+
     user.cart.push(productToAdd);
     await user.save();
     res.json({success:true, message:"Product added to Cart"});

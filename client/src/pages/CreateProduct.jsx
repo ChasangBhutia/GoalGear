@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useProduct } from '../hooks/useProduct'
 
 const CreateProduct = () => {
 
@@ -10,6 +11,8 @@ const CreateProduct = () => {
         discount:0,
         category:''
     }) 
+
+    const {createNewProduct} = useProduct();
 
     const handleChange = (e)=>{
         if(e.target.name==='image'){
@@ -32,14 +35,7 @@ const CreateProduct = () => {
         formData.append('price', productData.price);
         formData.append('discount', productData.discount);
         formData.append('category', productData.category);
-        try{
-            let response = await axios.post('http://localhost:3000/product/create-product', formData,{
-                withCredentials:true
-            })
-            alert(response.data.message);
-        }catch(err){
-            console.log(err.message);
-        }
+       createNewProduct(formData);
     }
 
   return (

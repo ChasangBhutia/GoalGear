@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CartSummary = ({summary}) => {
+const CartSummary = ({summary, cartQuantity}) => {
   return (
     <div className='px-40 pb-10 mt-10'>
         <aside className='w-90'>

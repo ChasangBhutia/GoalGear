@@ -1,27 +1,9 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react'
 import ProductCard from './ProductCard';
+import { useProduct } from '../hooks/useProduct';
 
 const NewlyAdded = () => {
 
-    const [allProducts, setAllProducts] = useState([]);
-
-    useEffect(()=>{
-        const getProducts = async()=>{
-            try{
-                let response = await axios.get('http://localhost:3000/product/all-products',{
-                    withCredentials:true
-                })
-                if(response.data.success){
-                    setAllProducts(response.data.products.reverse());
-                }
-                
-            }catch(err){
-                console.log(err.message);
-            }
-        }
-        getProducts();
-    },[])
+    const {allProducts} = useProduct();
 
   return (
     <div id='newlyAdded' className='text-left px-10 py-10'>
