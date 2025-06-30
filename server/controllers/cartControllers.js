@@ -13,8 +13,10 @@ module.exports.addToCart = async (req, res) => {
     const {quantity, size} = req.body;
 
     let product = await productModel.findById(productId);
+    if(!product) return res.json({success:false, message:"Product not found"});
     let totalPrice = quantity*product.price;
     let totalDiscount = quantity*product.discount;
+    
     let productToAdd = {
         product:product._id,
         quantity,

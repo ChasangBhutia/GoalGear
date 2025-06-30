@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { getCart, addToCart, removeFromCart } from "../services/CartService";
+import { getCart, addToCart, removeFromCart } from "../services/CartServices";
 import { useNavigate } from "react-router-dom";
 
 const CartContext = createContext();
@@ -44,7 +44,7 @@ export const CartProvider = ({ children }) => {
             let response = await removeFromCart(productId);
             alert(response.data.message);
             if (response.data.success) {
-                setRefreshCart(refreshCart+1)
+                setRefreshCart(refreshCart + 1)
             }
         } catch (err) {
             console.log(err.message);
@@ -57,7 +57,7 @@ export const CartProvider = ({ children }) => {
             let response = await addToCart(productData, productId);
             alert(response.data.message);
             if (response.data.success) {
-                setRefreshCart(refreshCart+1);
+                setRefreshCart(refreshCart + 1);
                 navigate('/cart');
             }
         } catch (err) {

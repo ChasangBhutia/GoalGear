@@ -23,6 +23,9 @@ export const useProduct = (productId) => {
 
     // get particular product
     useEffect(() => {
+        if (!productId) {
+            return;
+        }
         const fetchProduct = async () => {
             try {
                 let response = await getProduct(productId);
