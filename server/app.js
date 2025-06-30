@@ -20,13 +20,15 @@ const ConnectDB = require('./config/db');
 const ownerRouter = require('./routes/ownerRouter')
 const userRouter = require('./routes/userRouter')
 const productRouter = require('./routes/productRouter');
+const authRouter = require('./routes/authRouter');
 
 
 ConnectDB();
 
-app.use('/owner', ownerRouter)
-app.use('/user', userRouter)
-app.use('/product', productRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/owner', ownerRouter)
+app.use('/api/user', userRouter)
+app.use('/api/product', productRouter)
 
 app.listen(3000,()=>{
     console.log("Server is live");

@@ -1,12 +1,9 @@
-import axios from 'axios'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 
 const ProductDisplay = ({ product }) => {
 
-  const {setRefreshCart} = useCart();
-  const navigate = useNavigate();
+  const {addProduct} = useCart();
   const [quantity, setQuantity] = useState(1)
   const [selectedSize, setSelectedSize] = useState(null);
 
@@ -21,22 +18,7 @@ const ProductDisplay = ({ product }) => {
       quantity,
       size:selectedSize
     }
-    try{
-      let response = await axios.post(`http://localhost:3000/user/add-to-cart/${productId}`, data, {
-        withCredentials: true
-      })
-      alert(response.data.message);
-      if(response.data.success){
-        setRefreshCart((prev)=>({
-          ...prev+1
-        }))
-        navigate('/cart');
-      }
-    }catch(err){
-      console.log(err.message);
-    }
-    
-
+    addProduct(productId, data);
   }
 
 

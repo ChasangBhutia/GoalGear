@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion';
 import juggling from '../assets/juggling.gif'
-import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import {useAuth} from '../context/AuthContext';
 
 const LoginSignup = () => {
 
-    const navigate = useNavigate();
+    const {errorMessage, registerUser, loginUser} = useAuth();
     const [haveAccount, setHaveAccount] = useState(false);
     const [userData, setUserData] = useState(
         haveAccount?{
@@ -18,7 +17,7 @@ const LoginSignup = () => {
         password:''
     }
     );
-    const [errorMessage, setErrorMessage] = useState('');
+    const [authError, setAuthError] = useState('');
 
     const handleChange = (e)=>{
         setUserData((prev)=>({
@@ -29,23 +28,8 @@ const LoginSignup = () => {
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
-    
-        const formData = new FormData();
-        !haveAccount && formData.append('fullname', userData.fullname);
-        formData.append('email', userData.email);
-        formData.append('password', userData.password);
-        
-        var uri = haveAccount?'http://localhost:3000/user/login':'http://localhost:3000/user/register';
-        try{
-            let response = await axios.post(uri, formData, {
-                withCredentials:true,
-            })
-            setErrorMessage(response.data.message);
-            if(response.data.accountExist) setHaveAccount(true);
-            if(response.data.success) navigate('/');
-        }catch(err){
-            console.log(err.message);
-        }
+        haveAccount ? loginUser(userData) : registerUser(userData);
+        setAuthError(errorMessage);
     }
 
 
@@ -67,7 +51,7 @@ const LoginSignup = () => {
                     <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="password" name='password' onChange={handleChange} value={userData.password} placeholder='password' required/>
                     {haveAccount?<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value='Login' />:<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value='Create Account' />}
                 </form>
-                <p className='text-center text-red-500'>{errorMessage}</p>
+                <p className='text-center text-red-500'>{authError}</p>
                 <button className='mt-7 z-99' onClick={() => setHaveAccount(!haveAccount)}>{haveAccount ? "Don't have an account? Create" : "Already Registered? Login"}</button>
 
             </motion.section>

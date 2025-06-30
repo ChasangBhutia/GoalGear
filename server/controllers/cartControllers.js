@@ -30,10 +30,10 @@ module.exports.addToCart = async (req, res) => {
 }
 
 module.exports.removeFromCart = async (req, res)=>{
-    const {cartId} = req.params;
+    const {productId} = req.params;
     let user = await userModel.findOneAndUpdate(
         {email:req.user.email},
-        {$pull: {cart: {_id:cartId}}},
+        {$pull: {cart: {_id:productId}}},
         {new:true}
     )
     res.json({success:true, message:"Product removed from cart"});

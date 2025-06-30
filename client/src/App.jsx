@@ -10,10 +10,13 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import AdminRoutes from './utils/AdminRoutes';
 import UserRoutes from './utils/UserRoutes';
+import { AuthProvider } from './context/AuthContext';
 
 const App = () => {
   return (
     <BrowserRouter>
+    <AuthProvider>
+
       <div className='h-full overflow-hidden'>
         <Routes>
           <Route path='/login' element={<LoginSignup/>}/>
@@ -24,6 +27,7 @@ const App = () => {
           <Route path="/cart" element={<Cart/>}/>
         </Routes>
       </div>
+    </AuthProvider>
     </BrowserRouter>
   )
 }
