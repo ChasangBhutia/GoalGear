@@ -9,9 +9,12 @@ import niviaLogo from '../assets/nivia.jpg';
 import background from "../assets/background.png"
 import "./styles/style.css";
 import Typed from 'typed.js';
+import { useLocation } from 'react-router-dom';
 
 
 const Hero = () => {
+
+  const location = useLocation();
 
   const el = React.useRef(null);
 
@@ -41,7 +44,7 @@ const Hero = () => {
               <a href="#featured" className='ms-10'><button className='h-10 rounded-3xl w-70 bg-zinc-900 text-white'>Explore</button></a>
             </aside>
             <aside className='flex-1 flex justify-center'>
-              <motion.img className='ronaldoImg relative ' initial={{ bottom: '50px', opacity: 0.5 }} whileInView={{ bottom: 0, opacity: 1 }} transition={{ duration: 1 }} src={ronaldoImg} alt="" />
+              <motion.img key={location.pathname} className='ronaldoImg relative ' initial={{ bottom: '50px', opacity: 0.5 }} whileInView={{ bottom: 0, opacity: 1 }} transition={{ duration: 1 }} src={ronaldoImg} alt="" />
             </aside>
             <aside className='flex-1 flex pt-30 flex-nowrap flex-col gap-4 overflow-hidden '>
               <h1 className='text-2xl font-semibold'>Our Collaborations</h1>

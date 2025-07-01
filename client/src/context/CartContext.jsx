@@ -67,7 +67,7 @@ export const CartProvider = ({ children }) => {
 
     //To get the summary of cart like total price and final price after discount and delivery charges
     function getCartSummary(summaryDetail) {
-        let deliveryCharge = cartQuantity > 0 ? 24 : 0;
+        let deliveryCharge = 24;
         let subtotal = 0;
         let discount = 0;
         summaryDetail.map(c => {
