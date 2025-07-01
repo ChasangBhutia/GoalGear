@@ -2,9 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { useCart } from '../context/CartContext';
+import {useAuth} from '../context/AuthContext';
 
 const MenuBar = () => {
 
+    const {user} = useAuth();
     const {cartQuantity} = useCart();
   return (
     <nav className='flex px-[5vw] justify-between bg-zinc-900 text-white h-[8vh] items-center'>
@@ -43,7 +45,7 @@ const MenuBar = () => {
                 <Link to="/login"><button>Login</button></Link>
             </li>
             <li>
-                <Link to="/profile"><img src="" alt="" /></Link>
+                <Link to="/user"><img className='h-10 w-10 rounded-[100%]' src={`http://localhost:3000/uploads/${user.image}`} alt="" /></Link>
             </li>
         </ul>
     </nav>

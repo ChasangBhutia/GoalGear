@@ -1,7 +1,6 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useLocation, Routes, Route } from 'react-router-dom';
 import "./App.css";
-import Navbar from './components/Navbar';
 import Shop from './pages/Shop';
 import LoginSignup from './pages/LoginSignup';
 import CreateProduct from './pages/CreateProduct';
@@ -13,13 +12,19 @@ import UserRoutes from './utils/UserRoutes';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Profile from './pages/Profile';
+import MenuBar from './components/MenuBar';
+
 
 const App = () => {
+
+  const location = useLocation();
+  const hideNavbarRoutes = ['/','/login'];
+
   return (
-    <BrowserRouter>
       <AuthProvider>
         <CartProvider>
           <div className='h-full overflow-hidden'>
+            {!hideNavbarRoutes.includes(location.pathname) && <MenuBar/>}
             <Routes>
               <Route path='/login' element={<LoginSignup />} />
               <Route path='/' element={<Shop />} />
@@ -32,7 +37,6 @@ const App = () => {
           </div>
         </CartProvider>
       </AuthProvider>
-    </BrowserRouter>
   )
 }
 

@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import ProductDisplay from '../components/ProductDisplay'
-import MenuBar from '../components/MenuBar';
 import { useProduct } from '../hooks/useProduct';
 
 const Product = () => {
@@ -9,7 +8,6 @@ const Product = () => {
    
   return (
     <div>
-        <MenuBar/>
         <ProductDisplay product={product}/>
     </div>
   )
