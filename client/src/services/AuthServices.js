@@ -9,5 +9,13 @@ export const login = (userData)=>{
 }
 
 export const logout = ()=>{
-    return api.post('api/auth/logout');
+    return api.get('api/auth/logout');
+}
+
+export const uploadImage = (userImage)=>{
+    return api.put('api/user/upload-profile-image', userImage);
+}
+
+export const getUser = ()=>{
+    return api.get('api/user/get-user');
 }

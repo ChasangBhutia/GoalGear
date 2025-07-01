@@ -20,6 +20,9 @@ server/build/
 # Optional npm cache directory
 .npm/
 
+#user uploads
+server/uploads
+
 # dotenv environment variable files
 .env
 .env.*.local

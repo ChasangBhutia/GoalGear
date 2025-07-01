@@ -12,6 +12,7 @@ import AdminRoutes from './utils/AdminRoutes';
 import UserRoutes from './utils/UserRoutes';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
               <Route path="/category/:type" element={<Category />} />
               <Route path="/product/:productId" element={<UserRoutes><Product /></UserRoutes>} />
               <Route path="/cart" element={<Cart />} />
+              <Route path='/user' element={<Profile/>}/>
             </Routes>
           </div>
         </CartProvider>

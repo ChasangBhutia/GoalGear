@@ -2,25 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './styles/style.css'
 import { Link } from 'react-router-dom'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-import axios from 'axios';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
 
-    const [user, setUser] = useState({});
+    const {user} = useAuth();
     const {cartQuantity} = useCart();
-
-    useEffect(()=>{
-        const getUser = async()=>{
-            let response = await axios.get('http://localhost:3000/api/user/get-user',{
-                withCredentials:true
-            })
-            if(response.data.success){
-                setUser(response.data.user);
-            }
-        }
-        getUser();
-    },[])
 
   return (
     <nav className='flex justify-between pb-4 px-15'>
@@ -46,7 +34,7 @@ const Navbar = () => {
                 <button className='bg-zinc-900 text-white p-2 rounded-4xl w-30 text-sm'>Login</button>
             </li>
             </Link>
-            <Link to="/profile"><li>
+            <Link to="/user"><li>
                 <img className='h-10 w-10 rounded-[100%]' src={`http://localhost:3000/uploads/${user.image}`} alt="" />
             </li>
             </Link>

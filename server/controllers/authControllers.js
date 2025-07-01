@@ -55,7 +55,16 @@ module.exports.login = async (req, res) => {
 
 module.exports.logout = (req, res) => {
     res.clearCookie('token');
-    res.json({message:"Logged Out"});
+    res.json({success:true,message:"Logged Out"});
+}
+
+module.exports.uploadProfileImage = async (req,res)=>{
+    let user = await userModel.findOneAndUpdate(
+        {email:req.user.email},
+        {$set: {image : req.file.filename}},
+        {new : true}
+    );
+    res.json({success:true, message:"Image Uploaded"});
 }
 
 module.exports.getUser = async(req,res)=>{

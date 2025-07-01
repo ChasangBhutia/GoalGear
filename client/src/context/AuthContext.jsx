@@ -1,5 +1,5 @@
-import { useContext, createContext, useState } from "react";
-import { register, login, logout } from "../services/AuthServices";
+import { useContext, createContext, useState, useEffect } from "react";
+import { register, login, uploadImage, getUser } from "../services/AuthServices";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -7,7 +7,8 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children})=>{
     const navigate = useNavigate();
-
+    const [refresh, setRefresh] = useState(0);
+    const [user, setUser] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
 
     const registerUser = async (userData)=>{
@@ -30,10 +31,29 @@ export const AuthProvider = ({children})=>{
         }
     }
 
+    const uploadProfilImage = async (userImage)=>{
+        try{
+            let response = await uploadImage(userImage);
+            alert(response.data.message);
+            setRefresh(refresh+1);
+        }catch(err){
+            console.log(err);
+        }
+    }
+    useEffect(()=>{
+        const fetchUser = async()=>{
+            let response = await getUser();
+            if(response.data.success){
+                setUser(response.data.user);
+            }
+        }
+        fetchUser();
+    },[refresh])
+
     
 
     return (
-        <AuthContext.Provider value={{errorMessage, registerUser, loginUser}}>
+        <AuthContext.Provider value={{errorMessage, registerUser, loginUser, uploadProfilImage, user ,setRefresh}}>
             {children}
         </AuthContext.Provider>
         )
