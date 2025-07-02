@@ -44,7 +44,7 @@ const LoginSignup = () => {
                    <p className='text-black'>{haveAccount?"Login to your account to continue shopping":"Create an account to buy exciting football kits"}</p>
             </motion.section>
             <motion.section className='z-98 rounded-lg w-100 px-15 h-100 bg-[rgba(184,207,206,0.9)] flex flex-col justify-center' initial={{ x: '-100%'}} animate={{ x: haveAccount ? '-10%' : '-100%'}} transition={{ duration: 0.5 }}>
-                <h1 style={{fontFamily:'"Poppins",sans-serif'}} className='mt-5 mb-6 text-3xl'>{haveAccount ? "Login" : "Sign Up"}</h1>
+                <h1 className='mt-5 mb-6 text-3xl'>{haveAccount ? "Login" : "Sign Up"}</h1>
                 <form className='flex flex-col gap-2 justify-center' onSubmit={handleSubmit}>
                     {!haveAccount && <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="text" onChange={handleChange} value={userData.fullname} name='fullname' placeholder='Fullname' required/>}
                     <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="email" name='email' onChange={handleChange} value={userData.email} placeholder='Email' required/>

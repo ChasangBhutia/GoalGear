@@ -22,22 +22,23 @@ const SideMenu = () => {
     }
 
     return (
-        <nav className='p-5 w-1/4 h-1/2 flex justify-between flex-col gap-10'>
+        <nav className='p-5 w-1/4 bg-zinc-100 px-10 rounded-xl flex justify-between flex-col gap-10'>
             <section>
                 <h3 className='mb-5'>Shopping {'->'} Account</h3>
-                <ul className='flex flex-col gap-3'>
+                <h1 className='text-3xl font-light mb-8'>My Account</h1>
+                <ul className='flex flex-col gap-5'>
                     <li>
-                        <button className=''><span className='bg-blue-200 inline-block rounded-[100%] p-1 mr-5'><AccountBoxIcon /></span><span>My Details</span></button>
+                        <button className=''><span className='bg-blue-200 inline-block rounded-[100%] p-1 mr-4'><AccountBoxIcon /></span><span>My Details</span></button>
                     </li>
                     <li>
-                        <button className=''><span className='bg-blue-200 inline-block rounded-[100%] p-1 mr-5'><LocationPinIcon /></span><span>My Address</span></button>
+                        <button className=''><span className='bg-blue-200 inline-block rounded-[100%] p-1 mr-4'><LocationPinIcon /></span><span>My Address</span></button>
                     </li>
                     <li>
-                        <button className=''><span className='bg-blue-200 inline-block rounded-[100%] p-1 mr-5'><LocalShippingIcon /></span><span>My Orders</span></button>
+                        <button className=''><span className='bg-blue-200 inline-block rounded-[100%] p-1 mr-4'><LocalShippingIcon /></span><span>My Orders</span></button>
                     </li>
                 </ul>
             </section>
-            <button className='outline rounded-3xl h-10 w-60' onClick={logoutUser}>Log Out</button>
+            <button className='outline rounded-3xl h-10 w-60 hover:bg-zinc-900 hover:text-white transition duration-500' onClick={logoutUser}>Log Out</button>
         </nav>
     )
 }

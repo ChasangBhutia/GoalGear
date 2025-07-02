@@ -28,7 +28,7 @@ const Hero = () => {
   },[]);
 
   return (
-    <div className='h-screen w-full p-4'>
+    <div id='hero' className='h-screen w-full p-4'>
       <div className='rounded-xl h-full w-full overflow-hidden bg-[100vw, 100vh] bg-center' style={{backgroundImage:`url(${background})`}}>
         <div className='bg-[rgba(0,0,0,0.1)]'>
         <Navbar />

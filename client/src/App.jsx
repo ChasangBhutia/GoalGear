@@ -13,30 +13,47 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Profile from './pages/Profile';
 import MenuBar from './components/MenuBar';
+import Footer from './components/Footer'
+import { useEffect } from 'react';
 
 
 const App = () => {
 
   const location = useLocation();
-  const hideNavbarRoutes = ['/','/login'];
+  const hideNavbarRoutes = ['/', '/login'];
+  useEffect(() => {
+    if (location.pathname !== "/") return;
+
+    const hash = location.hash?.substring(1);
+    if (!hash) return;
+    const timeout = setTimeout(() => {
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, [location]);
 
   return (
-      <AuthProvider>
-        <CartProvider>
-          <div className='h-full overflow-hidden'>
-            {!hideNavbarRoutes.includes(location.pathname) && <MenuBar/>}
-            <Routes>
-              <Route path='/login' element={<LoginSignup />} />
-              <Route path='/' element={<Shop />} />
-              <Route path='/admin/create-product' element={<AdminRoutes><CreateProduct /></AdminRoutes>} />
-              <Route path="/category/:type" element={<Category />} />
-              <Route path="/product/:productId" element={<UserRoutes><Product /></UserRoutes>} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path='/user' element={<Profile/>}/>
-            </Routes>
-          </div>
-        </CartProvider>
-      </AuthProvider>
+    <AuthProvider>
+      <CartProvider>
+        <div className='h-full overflow-hidden'>
+          {!hideNavbarRoutes.includes(location.pathname) && <MenuBar />}
+          <Routes>
+            <Route path='/login' element={<LoginSignup />} />
+            <Route path='/' element={<Shop />} />
+            <Route path='/admin/create-product' element={<AdminRoutes><CreateProduct /></AdminRoutes>} />
+            <Route path="/category/:type" element={<Category />} />
+            <Route path="/product/:productId" element={<UserRoutes><Product /></UserRoutes>} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path='/user' element={<Profile />} />
+          </Routes>
+          <Footer />
+        </div>
+
+      </CartProvider>
+    </AuthProvider>
   )
 }
 

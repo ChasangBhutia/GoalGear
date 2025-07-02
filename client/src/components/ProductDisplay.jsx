@@ -26,7 +26,7 @@ const ProductDisplay = ({ product }) => {
     <article className='h-90 w-180 m-auto flex gap-2 mt-20'>
       <img className='rounded-lg h-full w-1/2' src={`http://localhost:3000/uploads/${product.image}`} alt="" />
       <section className='flex flex-col gap-2 w-1/2'>
-        <h2 className='text-3xl font-semibold' style={{ fontFamily: '"Poppins",sans-serif' }}>{product.name}</h2>
+        <h2 className='text-3xl'>{product.name}</h2>
        <section>
          <p className={`inline mr-4 ${product.discount>0 && 'line-through'}`}>Price: ₹{product.price}</p>
         <p className='inline'>Discount: ₹{product.discount}</p>

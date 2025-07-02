@@ -4,7 +4,7 @@ import ProfileDetails from '../components/ProfileDetails'
 const Profile = () => {
   return (
     <div className=''>
-        <section className='h-[92vh] py-5 px-20 flex'>
+        <section className='h-[92vh] py-5 px-30 flex gap-0'>
             <SideMenu/>
             <ProfileDetails/>
         </section>

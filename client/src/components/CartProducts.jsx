@@ -4,7 +4,7 @@ const CartProducts = (props) => {
   
   return (
     <div className='text-center pt-10'>
-        <h1 className='text-3xl mb-5' style={{fontFamily:'"Poppins",sans-serif'}}>Cart</h1>
+        <h1 className='text-3xl mb-5'>Cart</h1>
         {props.cartQuantity>0 ? <table className='w-auto m-auto'>
             <thead>
                 <tr className='px-10'>
