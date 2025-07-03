@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 const ProductCard = (props) => {
   return (
     <Link to={`/product/${props.id}`}>
-      <motion.article initial={{ opacity: 0, scale: 0.5 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className='flex flex-col h-80 w-60 text-left'>
+      <motion.article initial={{ opacity: 0, scale: 0.5 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} viewport={{once:false}} className='flex flex-col h-80 w-60 text-left'>
         <img className='h-[80%] w-full' src={`http://localhost:3000/uploads/${props.imgUrl}`} alt={`${props.name} image`} />
         <h3>{props.name}</h3>
         <section>

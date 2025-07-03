@@ -1,5 +1,13 @@
 import api from './api'
 
+export const verifyOtp = (userData)=>{
+    return api.post('api/auth/verify-otp' , userData);
+}
+
+export const getOtp = (userData)=>{
+    return api.post('api/auth/send-otp' , userData);
+}
+
 export const register = (userData)=>{
     return api.post('api/auth/register', userData);
 }

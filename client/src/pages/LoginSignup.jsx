@@ -5,20 +5,28 @@ import {useAuth} from '../context/AuthContext';
 
 const LoginSignup = () => {
 
-    const {errorMessage, registerUser, loginUser} = useAuth();
+    const {CheckOtp, fetchOtp, errorMessage, registerUser, loginUser} = useAuth();
+    const [otpSection, setOtpSection] = useState(true);
     const [haveAccount, setHaveAccount] = useState(false);
+    const [authError, setAuthError] = useState('');
     const [userData, setUserData] = useState(
         haveAccount?{
         email:'',
-        password:''
+        password:'',
+        otp: ''
     }:{
         fullname:'',
         email:'',
-        password:''
+        password:'',
+        otp:''
     }
     );
-    const [authError, setAuthError] = useState('');
 
+    const getOtp = ()=>{
+        fetchOtp(userData);
+        setOtpSection(false);
+    }
+    
     const handleChange = (e)=>{
         setUserData((prev)=>({
             ...prev,
@@ -28,6 +36,7 @@ const LoginSignup = () => {
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
+        CheckOtp(userData);
         haveAccount ? loginUser(userData) : registerUser(userData);
         setAuthError(errorMessage);
     }
@@ -49,7 +58,8 @@ const LoginSignup = () => {
                     {!haveAccount && <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="text" onChange={handleChange} value={userData.fullname} name='fullname' placeholder='Fullname' required/>}
                     <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="email" name='email' onChange={handleChange} value={userData.email} placeholder='Email' required/>
                     <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="password" name='password' onChange={handleChange} value={userData.password} placeholder='password' required/>
-                    {haveAccount?<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value='Login' />:<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value='Create Account' />}
+                    {!otpSection && <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="number" name='otp' onChange={handleChange} value={userData.otp} placeholder='Enter your OTP' required/>}
+                    {otpSection?<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value='Send OTP' onClick={getOtp}/>:<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value={haveAccount?'Login':'Create Account'} />}
                 </form>
                 <p className='text-center text-red-500'>{authError}</p>
                 <button className='mt-7 z-99' onClick={() => setHaveAccount(!haveAccount)}>{haveAccount ? "Don't have an account? Create" : "Already Registered? Login"}</button>
