@@ -1,5 +1,6 @@
 const express = require('express');
-const { getUser, uploadProfileImage } = require('../controllers/authControllers');
+const { uploadProfileImage,  addAddress, deleteAddress } = require('../controllers/userControllers');
+const { getUser } = require('../controllers/authControllers');
 const { addToCart, removeFromCart, getCart } = require('../controllers/cartControllers');
 const {isLoggedIn, isUser} = require('../middleware/isLoggedIn');
 const router = express.Router();
@@ -11,6 +12,8 @@ router.get('/', (req, res)=>{
 
 router.get('/get-user',isLoggedIn, isUser, getUser);
 router.put('/upload-profile-image',upload.single('image'), isLoggedIn, isUser, uploadProfileImage)
+router.post('/add-address', isLoggedIn, isUser, addAddress);
+router.delete('/remove-address/:addressId', isLoggedIn, isUser, deleteAddress);
 
 // Cart APIs
 router.get('/cart', isLoggedIn, isUser, getCart);

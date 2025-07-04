@@ -12,18 +12,18 @@ export const AuthProvider = ({children})=>{
     const [errorMessage, setErrorMessage] = useState('');
 
 
-     const CheckOtp = async (userData)=>{
+     const CheckOtp = async (email, otp)=>{
         try{
-            let response = await verifyOtp(userData);
+            let response = await verifyOtp(email, otp);
             alert(response.data.message);
         }catch(err){
             console.log(err.message);
         }
     }
 
-    const fetchOtp = async (userData)=>{
+    const fetchOtp = async (email)=>{
         try{
-            let response = await getOtp(userData);
+            let response = await getOtp(email);
             alert(response.data.message);
         }catch(err){
             console.log(err.message);

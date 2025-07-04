@@ -1,11 +1,11 @@
 import api from './api'
 
-export const verifyOtp = (userData)=>{
-    return api.post('api/auth/verify-otp' , userData);
+export const verifyOtp = (email, otp)=>{
+    return api.post('api/auth/verify-otp' , {email:email, otp:otp});
 }
 
-export const getOtp = (userData)=>{
-    return api.post('api/auth/send-otp' , userData);
+export const getOtp = (email)=>{
+    return api.post('api/auth/send-otp' , {email: email});
 }
 
 export const register = (userData)=>{

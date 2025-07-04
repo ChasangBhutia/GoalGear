@@ -5,9 +5,26 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     image: {
-        type:String,
-        default:'defaultUserProfilePic.jpg'
+        type: String,
+        default: 'defaultUserProfilePic.jpg'
     },
+    mobile: {
+        type: String,
+        default: '0000000000'
+    },
+    address: [
+        {
+            type:{
+                type:String,
+                enum:["Main", "Secondary", "Home", "Work", "Other" ]
+            },
+            country: String,
+            state: String,
+            city: String,
+            street: String,
+            zip: String
+        }
+    ],
     cart: [
         {
             product: {
@@ -19,9 +36,9 @@ const userSchema = new mongoose.Schema({
                 default: 1,
             },
             size: String,
-            totalPrice:Number,
-            totalDiscount:Number,
-            
+            totalPrice: Number,
+            totalDiscount: Number,
+
         }
     ],
     orders: {

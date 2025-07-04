@@ -22,10 +22,6 @@ const LoginSignup = () => {
     }
     );
 
-    const getOtp = ()=>{
-        fetchOtp(userData);
-        setOtpSection(false);
-    }
     
     const handleChange = (e)=>{
         setUserData((prev)=>({
@@ -33,10 +29,18 @@ const LoginSignup = () => {
             [e.target.name] : e.target.value
         }))
     }
+    const getOtp = ()=>{
+        if(!userData.email){
+            setOtpSection(true);
+        }else{
+            fetchOtp(userData.email);
+            setOtpSection(false);
+        }
+    }
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        CheckOtp(userData);
+        CheckOtp(userData.email, userData.otp);
         haveAccount ? loginUser(userData) : registerUser(userData);
         setAuthError(errorMessage);
     }
@@ -57,9 +61,9 @@ const LoginSignup = () => {
                 <form className='flex flex-col gap-2 justify-center' onSubmit={handleSubmit}>
                     {!haveAccount && <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="text" onChange={handleChange} value={userData.fullname} name='fullname' placeholder='Fullname' required/>}
                     <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="email" name='email' onChange={handleChange} value={userData.email} placeholder='Email' required/>
-                    <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="password" name='password' onChange={handleChange} value={userData.password} placeholder='password' required/>
-                    {!otpSection && <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="number" name='otp' onChange={handleChange} value={userData.otp} placeholder='Enter your OTP' required/>}
-                    {otpSection?<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value='Send OTP' onClick={getOtp}/>:<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value={haveAccount?'Login':'Create Account'} />}
+                    {(!otpSection && !haveAccount) && <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="number" name='otp' onChange={handleChange} value={userData.otp} placeholder='Enter your OTP' required/>}
+                    {(!otpSection || haveAccount) && <input className='bg-zinc-100 ps-2 rounded-lg h-14 w-full' type="password" name='password' onChange={handleChange} value={userData.password} placeholder={haveAccount?'Password':'Create Password'} required/>}
+                    {(otpSection && !haveAccount)?<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value='Send OTP' onClick={getOtp}/>:<input className='bg-[#F6E20C] rounded-lg h-12 w-full bg-[#F6E20C]' type="submit" value={haveAccount?'Login':'Create Account'} />}
                 </form>
                 <p className='text-center text-red-500'>{authError}</p>
                 <button className='mt-7 z-99' onClick={() => setHaveAccount(!haveAccount)}>{haveAccount ? "Don't have an account? Create" : "Already Registered? Login"}</button>

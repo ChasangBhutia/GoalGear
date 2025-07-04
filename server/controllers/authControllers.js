@@ -4,7 +4,7 @@ const ownerModel = require('../models/owner-model');
 const userModel = require('../models/user-model');
 const { generateToken } = require('../utils/generateToken');
 const { generateOtp } = require('../utils/generateOtp');
-const transporter = require('../config/mailTransporter');
+const sendOtpToEmail = require('../config/mailTransporter');
 
 module.exports.registerUser = async (req, res) => {
     const { fullname, email, password } = req.body;
@@ -15,7 +15,7 @@ module.exports.registerUser = async (req, res) => {
     let user = await userModel.findOne({ email });
     if (user) return res.json({ success: false, message: "Account already exist! Please Login", accountExist: true });
     let optRecord = await Otp.findOne({ email });
-    if (!optRecord) return res.json({ success: false, message: "OTP not verified" });
+    if (!optRecord) return res.json({ success: false, message: "OTP not Found" });
 
     if (!optRecord.verified) return res.json({ success: false, message: "OTP not verified" })
     bcrypt.genSalt(10, (err, salt) => {
@@ -35,22 +35,14 @@ module.exports.registerUser = async (req, res) => {
 
 module.exports.login = async (req, res) => {
     const { email, password } = req.body;
-    if (!email || !password) {
-        return res.json({ success: false, message: "All fields are required" });
-    }
+    if (!email || !password) return res.json({ success: false, message: "All fields are required" });
     var user = await userModel.findOne({ email });
     var role = "user";
     if (!user) {
         user = await ownerModel.findOne({ email });
         role = "admin";
     }
-    if (!user) {
-        return res.json({ success: false, message: "User do not exist.", accountExist: false });
-    }
-    let optRecord = await Otp.findOne({ email });
-    if (!optRecord) return res.json({ success: false, message: "OTP not verified" });
-
-    if (!optRecord.verified) return res.json({ success: false, message: "OTP not verified" });
+    if (!user) return res.json({ success: false, message: "User do not exist.", accountExist: false });
     bcrypt.compare(password, user.password, (err, result) => {
         if (!result) {
             return res.json({ success: false, message: "Password Wrong!" })
@@ -95,12 +87,7 @@ module.exports.sendOtp = async (req, res) => {
     try {
         await Otp.deleteMany({ email });
         await Otp.create({ email, otp, expiresAt });
-        await transporter.sendMail({
-            from: `"GoalGear, OTP" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: "Otp to continue in GoalGear",
-            text: `You have been hacked. Dont Share this otp: ${otp}`
-        });
+        sendOtpToEmail(email, otp);
         res.json({ success: true, message: "OTP sent successfully" });
     } catch (err) {
         console.log(err.message);
@@ -110,6 +97,7 @@ module.exports.sendOtp = async (req, res) => {
 
 module.exports.verifyOtp = async (req, res) => {
     const { otp, email } = req.body;
+
     let optRecord = await Otp.findOne({ email });
     if (!optRecord) return res.json({ success: false, message: "OTP not found" });
     if (optRecord.otp !== otp.toString()) return res.json({ success: false, message: "Incorrect Otp" });
@@ -117,12 +105,7 @@ module.exports.verifyOtp = async (req, res) => {
         await Otp.deleteMany({ email });
         return res.json({ success: false, message: "OTP expired" });
     }
-
-    console.log("Otp verified");
-
     optRecord.verified = true;
     await optRecord.save();
-
-
     res.json({ success: true, message: "OTP verified" });
 }

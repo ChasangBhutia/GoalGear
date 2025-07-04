@@ -57,7 +57,7 @@ const ProfileDetails = () => {
                 <section className=''>
                     <section className='w-1/2'>
                     <h4 className='mb-1'>Phone number</h4>
-                    <h3 className='outline p-3 rounded-4xl'>+91 9339197277</h3>
+                    <h3 className='outline p-3 rounded-4xl'>+91 {user.mobile}</h3>
                     </section>
                 </section>
                 <section className='mt-5'>
