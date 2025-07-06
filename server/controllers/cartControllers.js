@@ -3,7 +3,8 @@ const userModel = require('../models/user-model');
 
 
 module.exports.getCart = async (req, res) => {
-    const user = await userModel.findOne({ email: req.user.email }).populate('cart.product');
+    // to get all the details of the cart
+    const user = await userModel.findOne({ email: req.user.email }).populate('cart.product'); // populate the cart.product so that the product id turns into actual product with values from product model
     if (!user) return res.json({ success: false, message: "User not found" });
     res.json({ success: true, message: "Cart found", cart: user.cart });
 }
@@ -14,6 +15,7 @@ module.exports.addToCart = async (req, res) => {
 
     let product = await productModel.findById(productId);
     if (!product) return res.json({ success: false, message: "Product not found" });
+    // totalPrice and discount for particular product as the quantity might be more than 2 accordingly the total price and discount might be different.
     let totalPrice = quantity * product.price;
     let totalDiscount = quantity * product.discount;
 
@@ -25,10 +27,11 @@ module.exports.addToCart = async (req, res) => {
         totalDiscount
     }
     if (!product) return res.json({ success: false, message: "Item not found!" });
-    let user = await userModel.findOne({ email: req.user.email }).populate('cart.product');
+    let user = await userModel.findOne({ email: req.user.email }).populate('cart.product'); // populate the productId for actual values
     if (!user) return res.json({ success: false, message: "Please Login first" });
 
 
+    // for same product with same size in the cart instead of adding the whole product(duplicate), increase the quantity.
     for (let item of user.cart) {
         const isSame = item.product._id.toString() === productId && item.size === size
         if (isSame) {
@@ -48,6 +51,7 @@ module.exports.addToCart = async (req, res) => {
 
 module.exports.removeFromCart = async (req, res) => {
     const { productId } = req.params;
+    // find the user and remove the id from the cart
     await userModel.findOneAndUpdate(
         { email: req.user.email },
         { $pull: { cart: { _id: productId } } },

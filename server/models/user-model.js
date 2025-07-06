@@ -16,7 +16,6 @@ const userSchema = new mongoose.Schema({
         {
             type:{
                 type:String,
-                enum:["Main", "Secondary", "Home", "Work", "Other" ]
             },
             country: String,
             state: String,

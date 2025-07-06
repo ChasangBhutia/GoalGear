@@ -19,6 +19,7 @@ module.exports.getProduct = async(req, res)=>{
   res.json({success:true, message:"Product Found", product});
 }
 
+// only for admin to create/add new product in the store
 module.exports.createProduct = async (req, res) => {
     const { name, price, discount, category } = req.body;
     if (!name || !price || !discount || !category) {
@@ -34,6 +35,7 @@ module.exports.createProduct = async (req, res) => {
         price,
         category
     });
+    // storing all the products as ID show that all products record are managable by owner
     owner.products.push(product._id);
     await owner.save();
     res.json({ success: true, message: "Product Created" });
@@ -45,9 +47,13 @@ module.exports.deleteProduct = async (req, res) => {
     const product = await productModel.findById(productId);
     
     const imagePath = path.join('uploads',product.image);
+    //filtering the owner products so that there are only products having id which is not same as deleted ones'.
     owner.products = owner.products.filter(p=>p.toString()!==productId);
+
+    // deleting the product from prooduct model
     await productModel.deleteOne({ _id: productId });
     await owner.save();
+    // remove the image from the uploads directory at server
     fs.unlink(imagePath, (err) => {
       if (err) {
         console.error('Error deleting image file:', err);

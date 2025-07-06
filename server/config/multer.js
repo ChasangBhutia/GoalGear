@@ -8,6 +8,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb)=>{
         crypto.randomBytes(12, (err, bytes)=>{
+            // create an unique name for uploaded image
             const fn = `${Date.now()}-${bytes.toString('hex')}${path.extname(file.originalname)}`
             cb(null, fn);
         })

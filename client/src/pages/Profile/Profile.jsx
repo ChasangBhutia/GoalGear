@@ -1,8 +1,8 @@
-import SideMenu from '../components/SideMenu'
-import ProfileDetails from '../components/ProfileDetails'
-import ProfileAddress from '../components/ProfileAddress'
 import { useState } from 'react'
-import ProfileOrders from '../components/ProfileOrders'
+import SideMenu from '../../components/SideMenu'
+import ProfileDetails from './ProfileDetails'
+import ProfileAddress from './ProfileAddress'
+import ProfileOrders from './ProfileOrders'
 
 const Profile = () => {
 

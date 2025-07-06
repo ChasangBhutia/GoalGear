@@ -11,7 +11,7 @@ import AdminRoutes from './utils/AdminRoutes';
 import UserRoutes from './utils/UserRoutes';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
-import Profile from './pages/Profile';
+import Profile from './pages/Profile/Profile';
 import MenuBar from './components/MenuBar';
 import Footer from './components/Footer'
 import { useEffect } from 'react';
