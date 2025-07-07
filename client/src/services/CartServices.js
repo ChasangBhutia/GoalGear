@@ -11,3 +11,7 @@ export const addToCart = (productData, productId)=>{
 export const removeFromCart = (productId)=>{
     return api.delete(`api/user/cart/${productId}`);
 }
+
+export const createOrder = (amount)=>{
+    return api.post('api/payment/create-order',{amount: amount});
+}
