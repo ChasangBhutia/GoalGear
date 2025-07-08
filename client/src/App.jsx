@@ -21,6 +21,7 @@ const App = () => {
 
   const location = useLocation();
   const hideNavbarRoutes = ['/', '/login'];
+ 
   useEffect(() => {
     if (location.pathname !== "/") return;
 

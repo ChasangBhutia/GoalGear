@@ -46,7 +46,7 @@ const Hero = () => {
             <aside className='flex-1 flex justify-center'>
               <motion.img key={location.pathname} className='ronaldoImg relative h-[40vw]' initial={{ bottom: '50px', opacity: 0.5 }} whileInView={{ bottom: 0, opacity: 1 }} transition={{ duration: 1 }} src={ronaldoImg} alt="" />
             </aside>
-            <aside className='flex-1 flex flex-nowrap flex-col pb-8 pt-4 w-full bg-[rgba(0,0,0,0.2)] relative bottom-0'>
+            <aside className='flex-1 flex flex-nowrap flex-col pb-8 pt-4 w-full backdrop-blur-sm relative bottom-0'>
               <h1 className='text-[3vw] font-semibold mb-2 ml-2'>Our Collaborations</h1>
               <article className='flex w-250'>
                 <div className="logos flex">

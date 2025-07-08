@@ -10,7 +10,7 @@ const Profile = () => {
 
   return (
     <div className=''>
-        <section className='h-[92vh] py-5 px-30 flex gap-0'>
+        <section className='py-5 px-1 flex'>
             <SideMenu currSection={currSection} setCurrSection={setCurrSection}/>
             {currSection === 'details' && <ProfileDetails/>}
             {currSection === 'address' && <ProfileAddress/>}
