@@ -4,42 +4,41 @@ import LocationPinIcon from '@mui/icons-material/LocationPin';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { logout } from '../services/AuthServices';
 import { useNavigate } from 'react-router-dom';
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 
-const SideMenu = ({currSection, setCurrSection}) => {
+const SideMenu = ({ currSection, setCurrSection, menuClicked }) => {
 
     const navigate = useNavigate();
-    async function logoutUser(){
-        try{
+    async function logoutUser() {
+        try {
             let response = await logout();
-            if(response.data.success){
+            if (response.data.success) {
                 alert(response.data.message);
                 navigate('/login');
             }
-        }catch(err){
+        } catch (err) {
             console.log(err.message);
-            
+
         }
     }
 
     return (
-        <motion.nav className='relative bg-zinc-100 rounded-xl w-190 hidden flex justify-between flex-col'>
+        <motion.nav className={`${menuClicked ? 'flex' : 'hidden'} backdrop-blur-xl border-1 p-2 rounded w-[60vw] h-[100vw] z-98 fixed right-[3vw] top-[13vw] justify-between flex-col`}>
             <section>
-                <h3 className='mb-5 text-[2.5vw]'>Shopping {'->'} Account</h3>
-                <h1 className='text-[3.5vw] font-light mb-8'>My Account</h1>
+                <h1 className='text-[3.5vw] font-light mb-3 mt-7'>My Account</h1>
                 <ul className='flex flex-col gap-1'>
-                    <li onClick={()=>setCurrSection('details')} className={`p-2 ${currSection === 'details' ? 'bg-zinc-900 text-white':'hover:bg-zinc-200'} rounded-xl`}>
-                        <button ><span className='bg-zinc-900 inline-block rounded-[100%] p-1 mr-4'><AccountBoxIcon sx={{color:'white'}}/></span><span>My Details</span></button>
+                    <li className={`p-2 ${currSection === 'details' ? 'bg-zinc-900 text-white' : 'hover:bg-zinc-200'} rounded-xl w-[90%] h-[10vw] flex items-center`}>
+                        <button onClick={() => setCurrSection('details')} ><span className='bg-zinc-900 inline-block rounded-[100%] p-1 mr-[1vw]'><AccountBoxIcon sx={{ color: 'white', fontSize: '4vw', height: '5vw', width:'5vw' }} /></span><span className='text-[3vw]'>My Details</span></button>
                     </li>
-                    <li onClick={()=>setCurrSection('address')} className={`p-2 ${currSection === 'address' ? 'bg-zinc-900 text-white':'hover:bg-zinc-200'} rounded-xl`}>
-                        <button><span className='bg-zinc-900 inline-block rounded-[100%] p-1 mr-4'><LocationPinIcon sx={{color:'white'}}/></span><span>My Address</span></button>
+                    <li className={`p-2 ${currSection === 'address' ? 'bg-zinc-900 text-white' : 'hover:bg-zinc-200'} rounded-xl w-[90%] h-[10vw] flex items-center`}>
+                        <button onClick={() => setCurrSection('address')}><span className='bg-zinc-900 inline-block rounded-[100%] p-1 mr-[1vw]'><LocationPinIcon sx={{ color: 'white', fontSize: '4vw', height: '5vw', width:'5vw' }} /></span><span className='text-[3vw]'>My Address</span></button>
                     </li>
-                    <li  onClick={()=>setCurrSection('orders')} className={`p-2 ${currSection === 'orders' ? 'bg-zinc-900 text-white':'hover:bg-zinc-200'} rounded-xl`}>
-                        <button><span className='bg-zinc-900 inline-block rounded-[100%] p-1 mr-4'><LocalShippingIcon sx={{color:'white'}}/></span><span>My Orders</span></button>
+                    <li className={`p-2 ${currSection === 'orders' ? 'bg-zinc-900 text-white' : 'hover:bg-zinc-200'} rounded-xl w-[90%] h-[10vw] flex items-center`}>
+                        <button onClick={() => setCurrSection('orders')}><span className='bg-zinc-900 inline-block rounded-[100%] p-1 mr-[1vw]'><LocalShippingIcon sx={{ color: 'white', fontSize: '4vw', height: '5vw', width:'5vw' }} /></span><span className='text-[3vw]'>My Orders</span></button>
                     </li>
                 </ul>
             </section>
-            <button className='outline rounded-3xl h-10 w-[14vw] hover:bg-zinc-900 hover:text-white transition duration-500' onClick={logoutUser}>Log Out</button>
+            <button className='outline rounded-3xl h-[10vw] text-[4vw] w-[90%] hover:bg-zinc-900 hover:text-white transition duration-500' onClick={logoutUser}>Log Out</button>
         </motion.nav>
     )
 }

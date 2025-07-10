@@ -21,6 +21,7 @@ const App = () => {
 
   const location = useLocation();
   const hideNavbarRoutes = ['/', '/login'];
+  const hideFooterRoutes = ['/user', '/login'];
  
   useEffect(() => {
     if (location.pathname !== "/") return;
@@ -50,7 +51,7 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path='/user' element={<Profile />} />
           </Routes>
-          <Footer />
+          {!hideFooterRoutes.includes(location.pathname) && <Footer />}
         </div>
 
       </CartProvider>

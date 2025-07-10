@@ -52,53 +52,54 @@ const ProfileAddress = () => {
 
 
   return (
-    <motion.article initial={{ left: 700, opacity: 0 }} whileInView={{ left: 10, opacity: 1 }} transition={{ duration: 0.3 }} viewport={{ once: false }} className='relative w-3/4 rounded-lg p-5 mx-20'>
-      <h1 className='text-3xl'>My Address</h1>
-      <section className='grid grid-cols-2 gap-4 my-10'>
+    <motion.article className='relative rounded-lg p-2 pt-0'>
+      <h1 className='text-[5vw]'>My Address</h1>
+      <section className='grid grid-cols-2 gap-4 my-3'>
         {user.address.map((item, index) => {
           return (
-            <section key={index} className='outline p-3 rounded-2xl w-full'>
-              <header className='flex justify-between'>
-                <h2>{item.type} Address</h2>
-                <section>
-                  <button><EditSquareIcon /></button>
-                  <button onClick={()=>handleRemove(item._id)}><DeleteIcon /></button>
+            <section key={index} className='outline p-[2vw] w-1/2 rounded-lg w-full'>
+              <header className='flex justify-between items-center'>
+                <h2 className='text-[3vw] font-semibold'>{item.type} Address</h2>
+                <section className='flex items-center'>
+                  <button><EditSquareIcon sx={{fontSize:'5vw'}}/></button>
+                  <button onClick={()=>handleRemove(item._id)}><DeleteIcon sx={{fontSize:'5vw'}}/></button>
                 </section>
               </header>
               <article>
-                <h2>{user.fullname}</h2>
-                <p>{item.street}, {item.city}, {item.state}, {item.zip}, {item.country}.</p>
+                <h2 className='text-[3vw]'>{user.fullname}</h2>
+                <p className='text-[2.5vw]'>{item.street}, {item.city}, {item.state}, {item.zip}, {item.country}.</p>
               </article>
             </section>
           )
         })}
       </section>
-      {addAddressSection && <section className='fixed inset-0 h-screen w-full flex justify-center items-center bg-[rgba(0,0,0,0.3)] flex-col'>
-        <article className='bg-white p-5 rounded-xl'>
-          <header className='flex items-center mb-10 justify-between'>
-            <h1 className='text-3xl'>Add Address</h1>
-            <button className='bg-red-500 h-5 w-5 flex items-center justify-center text-white p-4 rounded' type='button' onClick={()=>setAddAddressSection(false)}>x</button>
+       <button className='bg-zinc-900 text-white rounded-4xl text-[3vw] h-[10vw] w-[40vw]' onClick={()=>setAddAddressSection(true)}>Add Address</button>
+      {addAddressSection && <section className='fixed inset-0 z-99 h-screen w-full flex justify-center items-center bg-[rgba(0,0,0,0.3)] flex-col'>
+        <article className='bg-white w-[80vw] p-2 rounded'>
+          <header className='flex items-center mb-3 justify-between'>
+            <h1 className='text-[4vw]'>Add Address</h1>
+            <button className='bg-red-500 h-[6vw] w-[6vw] flex items-center justify-center text-white rounded' type='button' onClick={()=>setAddAddressSection(false)}>x</button>
           </header>
-          <form className='flex flex-col gap-5' onSubmit={handleSubmit}>
-            <section className='flex gap-4 items-center'>
-              <p>Street: </p>
-              <input className='outline h-10 rounded ps-2' name='street' onChange={handleChange} type="text" placeholder='Enter your street' />
-              <p>City: </p>
-              <input className='outline h-10 rounded ps-2' name='city' onChange={handleChange} type="text" placeholder='Enter your City' />
+          <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
+            <section className='flex gap-1 items-center'>
+              <p className='text-[2.5vw]'>Street: </p>
+              <input className='outline h-[7vw] w-[28vw] text-[2.5vw] rounded ps-1' name='street' onChange={handleChange} type="text" placeholder='Enter your street' />
+              <p className='text-[2.5vw]'>City: </p>
+              <input className='outline h-[7vw] w-[28vw] text-[2.5vw] rounded ps-1' name='city' onChange={handleChange} type="text" placeholder='Enter your City' />
             </section>
-            <section className='flex gap-4 items-center'>
-              <p>State: </p>
-              <input className='outline h-10 rounded ps-2' name='state' onChange={handleChange} type="text" placeholder='Enter your State' />
-              <p>Country: </p>
-              <input className='outline h-10 rounded ps-2' name='country' onChange={handleChange} type="text" placeholder='Enter your Country' />
+            <section className='flex gap-1 items-center'>
+              <p className='text-[2.5vw]'>State: </p>
+              <input className='outline h-[7vw] w-[28vw] text-[2.5vw] rounded ps-1' name='state' onChange={handleChange} type="text" placeholder='Enter your State' />
+              <p className='text-[2.5vw]'>Country: </p>
+              <input className='outline h-[7vw] w-[28vw] text-[2.5vw] rounded ps-1' name='country' onChange={handleChange} type="text" placeholder='Enter your Country' />
             </section>
-            <section className='flex gap-4 items-center'>
-              <p>Zip Code: </p>
-              <input className='outline h-10 rounded ps-2' name='zip' onChange={handleChange} type="text" placeholder='Enter your Zip Code' />
+            <section className='flex gap-1 items-center'>
+              <p className='text-[2.5vw]'>Zip Code: </p>
+              <input className='outline h-[7vw] w-[28vw] text-[2.5vw] rounded ps-1' name='zip' onChange={handleChange} type="text" placeholder='Enter your Zip Code' />
             </section>
-            <section className='flex gap-4 items-center'>
-              <p>Address Type: </p>
-              <select name='type' onChange={handleChange} className='outline h-10 rounded w-70'>
+            <section className='flex gap-1 items-center'>
+              <p className='text-[2.5vw]'>Address Type: </p>
+              <select name='type' onChange={handleChange} className='outline h-[7vw] w-[28vw] text-[2.5vw] rounded w-70'>
                 <option selected disabled>Type</option>
                 <option value="Main">Main</option>
                 <option value="Secondary">Secondary</option>
@@ -107,11 +108,10 @@ const ProfileAddress = () => {
                 <option value="Other">Other</option>
               </select>
             </section>
-            <input className='bg-zinc-900 text-white py-3 rounded px-5 mt-10' type="submit" value="Add Address" />
+            <input className='bg-zinc-900 text-white py-3 rounded px-5 mt-3 text-[3vw]' type="submit" value="Add Address" />
           </form>
         </article>
       </section>}
-      <button className='bg-zinc-900 text-white rounded-4xl h-12 w-70' onClick={()=>setAddAddressSection(true)}>Add Address</button>
     </motion.article>
   )
 }

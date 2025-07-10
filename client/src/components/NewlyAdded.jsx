@@ -1,10 +1,11 @@
 import ProductCard from './ProductCard';
 import { useProduct } from '../hooks/useProduct';
+import ronaldo from '../assets/ronaldo.jpg';
 
 const NewlyAdded = () => {
 
-    const {allProducts} = useProduct();
-
+  const {allProducts} = useProduct();
+  
   return (
     <div id='newlyAdded' className='text-left py-5'>
         <h1 className='text-[5vw] ms-5'>Newly Added</h1>

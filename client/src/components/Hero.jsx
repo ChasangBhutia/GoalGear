@@ -22,31 +22,31 @@ const Hero = () => {
     const typed = new Typed(el.current, {
       strings: ['Quality.', 'Comfort.','Passion.'],
       typeSpeed: 100,
-      backSpeed:100,
-      loop:true
+      backSpeed:100
+      
     });
   },[]);
 
   return (
-    <div id='hero' className='h-screen w-full p-2'>
+    <div id='hero' className='h-[90vh] sm:h-screen w-full p-2'>
       <div className='rounded-xl h-full w-full overflow-hidden bg-cover bg-center' style={{backgroundImage:`url(${background})`}}>
-        <div className='bg-[rgba(0,0,0,0.1)] h-full'>
+        <div className='bg-[rgba(0,0,0,0.1)] h-full flex flex-col justify-between'>
         <Navbar />
-        <section className='flex flex-col mt-2'>
-          <section className='w-full text-center h-1/3'>
+        <section className='flex flex-col h-[calc(100%-7vw)] justify-between'>
+          <section className='w-full text-center h-[20%]'>
             <h1 className='text-[6vw] tracking-wider' style={{ fontFamily: '"Bebas Neue' }}>Gear Up Like A Pro</h1>
             <h3 className='text-[3vw] w-[70vw] m-auto font-light'>Shop Authentic Football Kits From Top Clubs & National Teams</h3>
-            <span className='text-[4vw] tracking-wider' style={{ fontFamily: '"Bebas Neue' }} ref={el}/>
+            <span className='text-[4vw] hidden tracking-wider' style={{ fontFamily: '"Bebas Neue' }} ref={el}></span>
           </section>
-          <section className='flex h-2/3 flex-col'>
+          <section className='flex flex-col-reverse'>
             <aside className='flex-1 w-[80vw] hidden m-auto text-center'>
               <p className='w-full text-[3vw] mb-2'>We bring you authentic football kits from top clubs and national teams, designed for fans who live the game. Wear your passion. Represent your team. Play bold, feel unstoppable.</p>
               <a href="#featured"><button className='h-[7vw] rounded-3xl w-[20vw] bg-zinc-900 text-white text-[2.5vw]'>Explore</button></a>
             </aside>
-            <aside className='flex-1 flex justify-center'>
-              <motion.img key={location.pathname} className='ronaldoImg relative h-[40vw]' initial={{ bottom: '50px', opacity: 0.5 }} whileInView={{ bottom: 0, opacity: 1 }} transition={{ duration: 1 }} src={ronaldoImg} alt="" />
+            <aside className='flex justify-center'>
+              <motion.img key={location.pathname} className='ronaldoImg relative h-140' initial={{ bottom: '10px', opacity: 0.5 }} whileInView={{ bottom: '-50px', opacity: 1 }} transition={{ duration: 1 }} src={ronaldoImg} alt="" />
             </aside>
-            <aside className='flex-1 flex flex-nowrap flex-col pb-8 pt-4 w-full backdrop-blur-sm relative bottom-0'>
+            <aside className='relative top-10 flex flex-nowrap flex-col pt-1 pb-3 mt-3 w-full bg-white'>
               <h1 className='text-[3vw] font-semibold mb-2 ml-2'>Our Collaborations</h1>
               <article className='flex w-250'>
                 <div className="logos flex">
