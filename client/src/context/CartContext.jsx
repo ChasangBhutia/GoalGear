@@ -9,6 +9,7 @@ export const CartProvider = ({ children }) => {
     const navigate = useNavigate();
 
     const [cart, setCart] = useState([]);
+
     const cartQuantity = cart.length;
     const [loading, setLoading] = useState(true)
     const [refreshCart, setRefreshCart] = useState(1);
@@ -23,9 +24,9 @@ export const CartProvider = ({ children }) => {
     const fetchCart = async () => {
         try {
             let response = await getCart();
-            if (response.data.success) {
+            if (response.data.success && Array.isArray(response.data.cart)) {
                 getCartSummary(response.data.cart);
-                setCart(response.data.cart.reverse());
+                setCart([...response.data.cart].reverse());
             }
         } catch (err) {
             console.log(err.message);

@@ -52,7 +52,7 @@ const ProfileAddress = () => {
 
 
   return (
-    <motion.article className='relative rounded-lg p-2 pt-0'>
+    <motion.article className='relative p-2 pt-0'>
       <h1 className='text-[5vw]'>My Address</h1>
       <section className='grid grid-cols-2 gap-4 my-3'>
         {user.address.map((item, index) => {

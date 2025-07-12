@@ -10,6 +10,7 @@ module.exports.getCart = async (req, res) => {
 }
 
 module.exports.addToCart = async (req, res) => {
+    
     const { productId } = req.params;
     const { quantity, size } = req.body;
 

@@ -5,6 +5,7 @@ const {isLoggedIn, isAdmin} = require('../middleware/isLoggedIn');
 const {generateToken} = require('../utils/generateToken');
 const ownerModel = require('../models/owner-model');
 const { getUser,login } = require('../controllers/authControllers');
+const { getAllUser } = require('../controllers/ownerControllers');
 
 router.get('/', (req, res)=>{
     res.send("Its working");
@@ -31,6 +32,8 @@ router.post('/register-owner', (req,res)=>{
     })
 })
 router.post('/login', login);
+
+router.get('/users', isLoggedIn, isAdmin, getAllUser);
 
 router.get('/get-user',isLoggedIn, isAdmin, getUser);
 

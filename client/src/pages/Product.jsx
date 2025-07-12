@@ -7,9 +7,9 @@ const Product = () => {
     const {product} = useProduct(productId);
    
   return (
-    <div>
+    <>
         <ProductDisplay product={product}/>
-    </div>
+    </>
   )
 }
 

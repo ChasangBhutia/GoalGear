@@ -38,7 +38,7 @@ const SideMenu = ({ currSection, setCurrSection, menuClicked }) => {
                     </li>
                 </ul>
             </section>
-            <button className='outline rounded-3xl h-[10vw] text-[4vw] w-[90%] hover:bg-zinc-900 hover:text-white transition duration-500' onClick={logoutUser}>Log Out</button>
+            <button className='outline rounded-3xl mx-auto h-[10vw] text-[4vw] w-[90%] hover:bg-zinc-900 hover:text-white transition duration-500' onClick={logoutUser}>Log Out</button>
         </motion.nav>
     )
 }

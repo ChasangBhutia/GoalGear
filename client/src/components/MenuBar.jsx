@@ -4,15 +4,18 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { Squash as Hamburger } from 'hamburger-react'
+import MobileNav from './MobileNav';
 
-const MenuBar = () => {
+const MenuBar = (props) => {
+
+    
 
     const { user } = useAuth();
     const { cartQuantity } = useCart();
     const [openMenu, setOpenMenu] = useState(false);
     return (
         <nav className='flex pl-[5vw] pr-[3vw] justify-between bg-zinc-900 text-white h-[10vw] items-center'>
-            <h1 className='text-[5vw]' style={{ fontFamily: '"Joti One",sans-serif' }}>GoalGear</h1>
+            <h1 className='text-[5vw]' style={{ fontFamily: '"Joti One",sans-serif' }}><span style={{ fontFamily: 'Joti One' }} className='text-[#BB3E00]'>Goal</span><span style={{ fontFamily: 'Joti One' }} className='text-[#205781]'>Gear</span></h1>
             <ul className='flex gap-10 hidden'>
                 <li>
                     <Link to="/">Home</Link>
@@ -61,29 +64,8 @@ const MenuBar = () => {
                     }
                 }} />
             </span>
-            <ul className={`fixed ${openMenu ? 'left-0 flex' : 'left-[120vw] hidden'} duration-200 inset-0 bg-white text-black z-9 flex flex-col items-center gap-3 h-screen pt-20`}>
-                <Link to="/"><li>Home</li></Link>
-                <Link to="/category/boots"><li>Boots</li></Link>
-                <Link to="/category/jerseys"><li>Jerseys</li></Link>
-                <Link to="/category/gloves"><li>Gloves</li></Link>
-                <Link to="/category/bags"><li>Bags</li></Link>
-                <Link to="/category/socks"><li>Socks</li></Link>
-                <Link to="/category/guards"><li>Guards</li></Link>
-                <Link to="/cart"><li className='relative'>
-                    <ShoppingBagOutlinedIcon fontSize='large' />
-                    <span className='absolute left-[13px] top-[12px] text-[15px]'>{cartQuantity}</span>
-                </li></Link>
-                <section className='flex gap-2 items-center'>
-                    <Link to="/login"><li>
-                        <button className='bg-zinc-900 text-white p-2 rounded-4xl w-30 text-sm'>Login</button>
-                    </li>
-                    </Link>
-                    <Link to="/user"><li>
-                        <img className='h-10 w-10 rounded-[100%]' src={`http://localhost:3000/uploads/${user.image}`} alt="" />
-                    </li>
-                    </Link>
-                </section>
-            </ul>
+            <MobileNav openMenu={openMenu} cartQuantity={cartQuantity} imgUrl={user.image} role={props.user.role}/>
+
         </nav>
     )
 }

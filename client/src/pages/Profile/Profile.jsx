@@ -15,7 +15,7 @@ const Profile = () => {
     <>
       <section className='flex justify-between items-center px-[3vw] py-3'>
         <h3 className='text-[3vw]'>Shopping {'->'} Account</h3>
-        <section className={menuClicked && 'fixed right-[2vw] top-[12vw] z-99 bg-red-500 p-2 rounded-[100%]'}>
+        <section className={menuClicked && 'fixed right-[2vw] top-[12vw] z-99 bg-red-400 p-2 rounded-[100%]'}>
           <ManageAccountsIcon onClick={()=>setMenuClicked(!menuClicked)} />
         </section>
       </section>

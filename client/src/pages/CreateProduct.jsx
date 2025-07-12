@@ -40,8 +40,8 @@ const CreateProduct = () => {
 
   return (
     <div className='text-center p-10'>
-        <h1 className='text-3xl mb-10' style={{fontFamily:'"Poppins",sans-serif'}}>Create A Product</h1>
-        <form className='flex flex-col m-auto w-100 gap-2' onSubmit={handleSubmit}>
+        <h1 className='text-[5vw] mb-10' style={{fontFamily:'"Poppins",sans-serif'}}>Create A Product</h1>
+        <form className='flex flex-col m-auto w-[70vw] gap-2' onSubmit={handleSubmit}>
             <input className='w-full outline h-10 rounded-md py-2 px-2' onChange={handleChange} name='image'  type="file" accept='image/*'/>
             <input className='w-full outline h-10 rounded-md px-2' onChange={handleChange} value={productData.name} name='name' type="text" placeholder='Product Name' />
             <section className='flex gap-2'>

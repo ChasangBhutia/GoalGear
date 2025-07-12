@@ -51,20 +51,19 @@ export const useProduct = (productId) => {
     }
 
     // Delete product Only for admin
-    useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                let response = await deleteProduct(productId);
-                if (response.data.success) {
-                    setProduct(response.data.product);
-                }
-            } catch (err) {
-                console.log(err.message);
+
+    const deleteItem = async () => {
+        try {
+            let response = await deleteProduct(productId);
+            if (response.data.success) {
+                setProduct(response.data.product);
             }
+        } catch (err) {
+            console.log(err.message);
         }
-        fetchProduct();
-    }, [])
+    }
 
 
-    return { allProducts, product, createNewProduct }
+
+    return { allProducts, product, createNewProduct, deleteItem }
 }

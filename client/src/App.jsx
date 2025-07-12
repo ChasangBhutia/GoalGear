@@ -9,12 +9,15 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import AdminRoutes from './utils/AdminRoutes';
 import UserRoutes from './utils/UserRoutes';
+import ProtectedRoutes from './utils/ProtectedRoutes'
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Profile from './pages/Profile/Profile';
 import MenuBar from './components/MenuBar';
 import Footer from './components/Footer'
 import { useEffect } from 'react';
+import AllUsers from './pages/AllUsers';
+import AllProducts from './pages/AllProducts';
 
 
 const App = () => {
@@ -41,13 +44,15 @@ const App = () => {
     <AuthProvider>
       <CartProvider>
         <div className='h-full overflow-hidden'>
-          {!hideNavbarRoutes.includes(location.pathname) && <MenuBar />}
+          {!hideNavbarRoutes.includes(location.pathname) && <ProtectedRoutes><MenuBar /></ProtectedRoutes>}
           <Routes>
             <Route path='/login' element={<LoginSignup />} />
             <Route path='/' element={<Shop />} />
             <Route path='/admin/create-product' element={<AdminRoutes><CreateProduct /></AdminRoutes>} />
+            <Route path='/admin/all-users' element={<AdminRoutes><AllUsers /></AdminRoutes>} />
+            <Route path='/admin/all-products' element={<AdminRoutes><AllProducts /></AdminRoutes>} />
             <Route path="/category/:type" element={<Category />} />
-            <Route path="/product/:productId" element={<UserRoutes><Product /></UserRoutes>} />
+            <Route path="/product/:productId" element={<Product />} />
             <Route path="/cart" element={<Cart />} />
             <Route path='/user' element={<Profile />} />
           </Routes>
