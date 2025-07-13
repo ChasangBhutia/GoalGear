@@ -1,13 +1,14 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { register, login, uploadImage, getUser, getOtp, verifyOtp } from "../services/AuthServices";
 import { useNavigate } from "react-router-dom";
+import {useSharedState} from './SharedStateContext';
 
 const AuthContext = createContext();
 
 
 export const AuthProvider = ({children})=>{
     const navigate = useNavigate();
-    const [refresh, setRefresh] = useState(0);
+    const {refresh, setRefresh} = useSharedState();
     const [user, setUser] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -34,6 +35,7 @@ export const AuthProvider = ({children})=>{
         try{
             let response = await register(userData);
             setErrorMessage(response.data.message);
+            setRefresh(refresh+1);
             if(response.data.success) navigate('/');
         }catch(err){
             console.log(err.message);
@@ -44,6 +46,7 @@ export const AuthProvider = ({children})=>{
         try{
             let response = await login(userData);
             setErrorMessage(response.data.message);
+            setRefresh(refresh+1);
             if(response.data.success) navigate('/');
         }catch(err){
             console.log(err.message);
@@ -72,7 +75,7 @@ export const AuthProvider = ({children})=>{
     
 
     return (
-        <AuthContext.Provider value={{CheckOtp, fetchOtp, errorMessage, registerUser, loginUser, uploadProfilImage, user ,setRefresh}}>
+        <AuthContext.Provider value={{CheckOtp, fetchOtp, errorMessage, registerUser, loginUser, uploadProfilImage, user}}>
             {children}
         </AuthContext.Provider>
         )

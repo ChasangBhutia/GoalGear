@@ -1,10 +1,13 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { getCart, addToCart, removeFromCart } from "../services/CartServices";
 import { useNavigate } from "react-router-dom";
+import { useSharedState } from "./SharedStateContext";
 
 const CartContext = createContext();
 
+
 export const CartProvider = ({ children }) => {
+    const { refresh } = useSharedState();
 
     const navigate = useNavigate();
 
@@ -37,7 +40,7 @@ export const CartProvider = ({ children }) => {
     }
     useEffect(() => {
         fetchCart();
-    }, [refreshCart])
+    }, [refreshCart, refresh])
 
     // Remove from cart method
     const removeProduct = async (productId) => {

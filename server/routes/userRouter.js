@@ -10,7 +10,7 @@ router.get('/', (req, res)=>{
     res.send("Its working");
 })
 
-router.get('/get-user',isLoggedIn, isUser, getUser);
+router.get('/get-user',isLoggedIn, getUser);
 router.put('/upload-profile-image',upload.single('image'), isLoggedIn, isUser, uploadProfileImage)
 router.post('/add-address', isLoggedIn, isUser, addAddress);
 router.delete('/remove-address/:addressId', isLoggedIn, isUser, deleteAddress);

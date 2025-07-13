@@ -4,7 +4,7 @@ import { createOrder } from '../services/CartServices';
 const CartSummary = ({ summary }) => {
 
     const [paymentSuccess, setPaymentSuccess] = useState(false);
-    
+
     const loadScript = (src) => {
         return new Promise((resolve) => {
             const script = document.createElement("script");
@@ -71,38 +71,37 @@ const CartSummary = ({ summary }) => {
     }
 
     return (
-        <div className='px-4 pb-10 mt-5'>
-            <aside className='w-[60vw]'>
-                <h1 className='font-semibold text-[4.5vw] mb-3'>Cart Summary</h1>
-                <table className='text-left text-[3vw]'>
-                    <tbody>
-                        <tr>
-                            <td className='w-90 h-[7vw]'><p>Subtotal </p></td>
-                            <td className='text-right'><p>₹{summary.subtotal}</p></td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td className='w-90 h-[7vw]'><p>Discount </p></td>
-                            <td className='text-right'><p>₹{summary.discount}</p></td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td className='w-90 h-[7vw]'><p>Delivery Charges</p></td>
-                            <td className='text-right'><p>₹{summary.deliveryCharge}</p></td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td className='w-90 h-[7vw]'><p>Total </p></td>
-                            <td className='text-right'><p>₹{summary.total}</p></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button className='bg-zinc-900 text-white w-[60vw] h-[8vw] text-[3.5vw]' onClick={checkoutOrder}>Checkout</button>
-            </aside>
-        </div>
+        <aside className='w-[60vw] m-5 lg:mx-30'>
+            <h1 className='text-[4.5vw] mb-3 sm:text-[30px]'>Cart Summary</h1>
+            <table className='text-left text-[3vw] sm:text-[20px]'>
+                <tbody>
+                    <tr>
+                        <td className='w-70 h-[7vw] sm:h-10'><p>Subtotal </p></td>
+                        <td className='text-right'><p>₹{summary.subtotal}</p></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td className='w-70 h-[7vw] sm:h-10'><p>Discount </p></td>
+                        <td className='text-right'><p>₹{summary.discount}</p></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td className='w-70 h-[7vw] sm:h-10'><p>Delivery Charges</p></td>
+                        <td className='text-right'><p>₹{summary.deliveryCharge}</p></td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <td className='w-70 h-[7vw] sm:h-10'><p>Total </p></td>
+                        <td className='text-right'><p>₹{summary.total}</p></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button className='bg-zinc-900 text-white w-[60vw] h-[8vw] text-[3.5vw] sm:text-[20px] sm:w-83 sm:h-13' onClick={checkoutOrder}>Checkout</button>
+        </aside>
+
     )
 }
 

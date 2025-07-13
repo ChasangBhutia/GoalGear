@@ -6,12 +6,16 @@ import { useAuth } from '../context/AuthContext';
 import { Squash as Hamburger } from 'hamburger-react'
 import { useState } from 'react';
 import MobileNav from './MobileNav';
+import LoginIcon from '@mui/icons-material/Login';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 const Navbar = (props) => {
 
     const { user } = useAuth();
     const { cartQuantity } = useCart();
     const [openMenu, setOpenMenu] = useState(false);
+    const [adminDropDown, setAdminDropDown] = useState(false);
 
     return (
         <nav className='flex justify-between h-[10vw] lg:h-10'>
@@ -29,16 +33,26 @@ const Navbar = (props) => {
                 <ul className='hidden md:flex justify-around text-md items-center gap-2 pr-2 pb-2 lg:pb-0 lg:pt-3 w-[40%] lg:w-[35%] lg:text-lg xl:pr-15'>
                     <Link to="/category/socks"><li>Socks</li></Link>
                     <Link to="/category/guards"><li>Guards</li></Link>
+                    {props.user.role === 'admin' &&
+                        <section>
+                            <button className='flex items' onClick={() => setAdminDropDown(!adminDropDown)}>Admin {adminDropDown ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}</button>
+                            <section className={`mb-t overflow-hidden bg-zinc-200 flex flex-col text-black fixed p-0 gap-3 rounded-md h-0 w-50 duration-100  ${adminDropDown ? 'h-33 py-4 px-5' : ''}`}>
+                                <Link to='/admin/all-users' onClick={() => setAdminDropDown(!adminDropDown)}>All Users</Link>
+                                <Link to='/admin/all-products' onClick={() => setAdminDropDown(!adminDropDown)}>All Products</Link>
+                                <Link to='/admin/create-product' onClick={() => setAdminDropDown(!adminDropDown)}>Create Product</Link>
+                            </section>
+                        </section>
+                    }
                     <Link to="/login"><li>
-                        <button className='bg-zinc-900 text-white p-2 rounded-4xl w-[9vw] text-sm'>Login</button>
+                        <button className='bg-zinc-900 text-white p-2 rounded text-sm'><LoginIcon /></button>
                     </li>
                     </Link>
 
                     <section className='flex gap-2 items-center'>
-                        <Link to="/cart"><li className='relative'>
+                        {props.role === 'user' && <Link to="/cart"><li className='relative'>
                             <ShoppingBagOutlinedIcon fontSize='large' />
                             <span className='absolute left-[13px] top-[12px] text-[15px]'>{cartQuantity}</span>
-                        </li></Link>
+                        </li></Link>}
                         <Link to="/user"><li>
                             <img className='h-[4vw] w-[4vw] rounded-[100%] lg:h-10 lg:w-10' src={`http://localhost:3000/uploads/${user.image}`} alt="" />
                         </li>
