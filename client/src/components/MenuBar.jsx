@@ -45,7 +45,7 @@ const MenuBar = (props) => {
                 {props.user.role === 'admin' &&
                     <li>
                         <button className='flex items' onClick={() => setAdminDropDown(!adminDropDown)}>Admin {adminDropDown ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}</button>
-                        <section className={`mb-t overflow-hidden bg-zinc-200 flex flex-col text-black fixed p-0 gap-3 rounded-md h-0 w-50 duration-100  ${adminDropDown ? 'h-33 py-4 px-5' : ''}`}>
+                        <section className={`mb-t overflow-hidden bg-zinc-200 flex flex-col text-black absolute p-0 gap-3 rounded-md h-0 w-50 duration-100  ${adminDropDown ? 'h-33 py-4 px-5' : ''}`}>
                             <Link to='/admin/all-users' onClick={() => setAdminDropDown(!adminDropDown)}>All Users</Link>
                             <Link to='/admin/all-products' onClick={() => setAdminDropDown(!adminDropDown)}>All Products</Link>
                             <Link to='/admin/create-product' onClick={() => setAdminDropDown(!adminDropDown)}>Create Product</Link>

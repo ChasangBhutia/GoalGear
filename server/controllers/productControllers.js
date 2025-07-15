@@ -43,7 +43,7 @@ module.exports.createProduct = async (req, res) => {
 
 module.exports.deleteProduct = async (req, res) => {
     const { productId } = req.params;
-    var owner = await ownerModel.findOne({email:req.user.email}); 
+    let owner = await ownerModel.findOne({email:req.user.email}); 
     const product = await productModel.findById(productId);
     
     const imagePath = path.join('uploads',product.image);

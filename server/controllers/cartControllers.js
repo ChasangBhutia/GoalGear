@@ -5,6 +5,11 @@ const userModel = require('../models/user-model');
 module.exports.getCart = async (req, res) => {
     // to get all the details of the cart
     const user = await userModel.findOne({ email: req.user.email }).populate('cart.product'); // populate the cart.product so that the product id turns into actual product with values from product model
+    user.cart.map((item,index)=>{
+        if(item.product === null){
+            user.cart.splice(index, 1);
+        }
+    })
     if (!user) return res.json({ success: false, message: "User not found" });
     res.json({ success: true, message: "Cart found", cart: user.cart });
 }
@@ -15,6 +20,7 @@ module.exports.addToCart = async (req, res) => {
     const { quantity, size } = req.body;
 
     let product = await productModel.findById(productId);
+    
     if (!product) return res.json({ success: false, message: "Product not found" });
     // totalPrice and discount for particular product as the quantity might be more than 2 accordingly the total price and discount might be different.
     let totalPrice = quantity * product.price;
