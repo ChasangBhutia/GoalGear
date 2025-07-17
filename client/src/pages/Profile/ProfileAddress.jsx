@@ -29,10 +29,6 @@ const ProfileAddress = () => {
     setAddAddressSection(false);
   }
 
-   const handleRemove = async (addressId) => {
-      removeUserAddress(addressId);
-  }
-
 
   return (
     <motion.article className='relative p-2 pt-0'>
@@ -45,7 +41,7 @@ const ProfileAddress = () => {
                 <h2 className='text-[3vw] font-semibold md:text-[20px]'>{item.type} Address</h2>
                 <section className='flex items-center'>
                   <button><EditSquareIcon sx={{fontSize:'3vw'}}/></button>
-                  <button onClick={()=>handleRemove(item._id)}><DeleteIcon sx={{fontSize:'3vw'}}/></button>
+                  <button onClick={()=>removeUserAddress(item._id)}><DeleteIcon sx={{fontSize:'3vw'}}/></button>
                 </section>
               </header>
               <article>

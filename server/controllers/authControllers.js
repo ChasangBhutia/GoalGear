@@ -39,7 +39,7 @@ module.exports.registerUser = async (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: 'None',
-            maxAge: 24 * 60 * 60 * 3000
+            maxAge: 30 * 24 * 60 * 60 * 1000
         });
         return res.status(201).json({ success: true, message: "Account created!" });
     } catch (err) {
@@ -74,7 +74,7 @@ module.exports.login = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'None',
-                maxAge: 24 * 60 * 60 * 3000
+                maxAge: 30 * 24 * 60 * 60 * 1000
             });
             return res.json({ success: true, message: "Logged In" });
         }
