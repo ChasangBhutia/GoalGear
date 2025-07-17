@@ -6,14 +6,15 @@ const cors = require('cors');
 
 const app = express();
 
-
+const PORT = process.env.PORT;
 
 app.use(express.json());
+app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.use('/uploads', express.static(path.join(__dirname,'uploads')));
 app.use(cookieParser());
 app.use(cors({
-    origin:'http://localhost:5173',
+    origin:'https://goal-gear.vercel.app',
     credentials:true,
     methods: ['GET','POST','DELETE','PUT']
 }));
@@ -34,6 +35,6 @@ app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/payment', paymentRouter)
 
-app.listen(3000,()=>{
+app.listen(PORT || 3000,()=>{
     console.log("Server is live");
 })
