@@ -12,8 +12,8 @@ module.exports.registerUser = async (req, res) => {
     if (!fullname || !email || !password) return res.status(400).json({ success: false, errors: "All fields are required" })
     const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/;
 
-    if(!passwordValidation.test(password)){
-        return res.json({success:false, errors:"Password must have 1 uppercase, 1 lowercase, 1 symbol and 1 digit"});
+    if (!passwordValidation.test(password)) {
+        return res.json({ success: false, errors: "Password must have 1 uppercase, 1 lowercase, 1 symbol and 1 digit" });
     }
 
     try {
@@ -35,7 +35,12 @@ module.exports.registerUser = async (req, res) => {
         })
         await newUser.save();
         let token = generateToken(newUser.email, "user");
-        res.cookie("token", token);
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+            maxAge: 24 * 60 * 60 * 3000
+        });
         return res.status(201).json({ success: true, message: "Account created!" });
     } catch (err) {
         if (err.name === "ValidationError") {
@@ -65,7 +70,12 @@ module.exports.login = async (req, res) => {
             return res.json({ success: false, errors: "Password Wrong!" })
         } else {
             let token = generateToken(user.email, role);
-            res.cookie("token", token);
+            res.cookie("token", token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None',
+                maxAge: 24 * 60 * 60 * 3000
+            });
             return res.json({ success: true, message: "Logged In" });
         }
     })
