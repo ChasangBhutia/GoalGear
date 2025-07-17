@@ -11,7 +11,7 @@ const MobileNav = ({ openMenu, cartQuantity, imgUrl, role }) => {
                     <span className='absolute top-3 left-15'>{cartQuantity}</span></Link>}
 
                 <Link to="/user">
-                    <img className='h-10 w-10 rounded-[100%]' src={`http://localhost:3000/uploads/${imgUrl}`} alt="profile pic" />
+                    <img className='h-10 w-10 rounded-[100%]' src={`https://goalgear-l3iw.onrender.com/uploads/${imgUrl}`} alt="profile pic" />
                 </Link>
             </section>
             <Link to="/"><li>Home</li></Link>

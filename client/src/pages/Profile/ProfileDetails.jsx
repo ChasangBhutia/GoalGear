@@ -26,7 +26,7 @@ const ProfileDetails = () => {
         <motion.article className='rounded-lg md:w-200  md:pr-3' >
             <h1 className='text-[5vw] md:text-[30px]'>My Details</h1>
             <header className='flex items-start gap-2 mt-2'>
-                <img className='h-[15vw] w-[15vw] rounded-[100%] md:h-20 md:w-20' src={`http://localhost:3000/uploads/${user.image}`} alt="" />
+                <img className='h-[15vw] w-[15vw] rounded-[100%] md:h-20 md:w-20' src={`https://goalgear-l3iw.onrender.com/uploads/${user.image}`} alt="" />
                 <aside className=''>
                     <h3 className='text-[3.5vw] md:text-[20px]'>{user.fullname}</h3>
                     <button className='bg-zinc-900 text-white rounded-4xl text-[2.5vw] w-[30vw] h-[7vw] md:h-10 md:w-50 md:text-[18px] md:mt-1' onClick={() => setUploadForm(true)}>Upload Image</button>
