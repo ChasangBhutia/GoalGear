@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useProduct } from '../hooks/useProduct'
+import { useProduct } from '../../hooks/useProduct'
 
 const CreateProduct = () => {
 
@@ -47,8 +47,8 @@ const CreateProduct = () => {
                 <input className='w-full outline h-10 rounded-md px-2' onChange={handleChange} value={productData.price} name='price' type="number" placeholder='Price'/>
                 <input className='w-full outline h-10 rounded-md px-2' onChange={handleChange} value={productData.discount} name='discount' type="number" placeholder='Discount'/>
             </section>
-            <select name='category' onChange={handleChange} className='h-10 outline rounded-md'>
-                <option disabled selected>Category</option>
+            <select name='category' onChange={handleChange} className='h-10 outline rounded-md' defaultValue="Category">
+                <option disabled>Category</option>
                 <option value="jerseys">Jersey</option>
                 <option value="boots">Boot</option>
                 <option value="gloves">Gloves</option>

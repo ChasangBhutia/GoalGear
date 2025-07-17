@@ -10,13 +10,13 @@ const { getAllUser } = require('../controllers/ownerControllers');
 router.get('/', (req, res)=>{
     res.send("Its working");
 })
-router.post('/register-owner', (req,res)=>{
+router.post('/register-owner', async (req,res)=>{
     const { fullname, email, password } = req.body;
     
     if (!fullname || !email || !password) {
         return res.json({ success: false, message: "All fields are required" })
     }
-    const owner = ownerModel.findOne({email});
+    const owner = await ownerModel.findOne({email});
     if(owner) return res.json({success:false, message:"Account already exist! Please Login"});
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, async (err, hash) => {

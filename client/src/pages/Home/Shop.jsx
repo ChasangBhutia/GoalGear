@@ -1,7 +1,7 @@
 import React from 'react'
-import Hero from "../components/Hero"
-import NewlyAdded from '../components/NewlyAdded'
-import Featured from '../components/Featured'
+import Hero from './Hero'
+import NewlyAdded from './NewlyAdded'
+import Featured from './Featured'
 
 const Shop = () => {
   return (

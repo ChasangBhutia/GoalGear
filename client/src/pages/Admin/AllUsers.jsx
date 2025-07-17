@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getAllUsers } from '../services/OwnerServices';
+import { getAllUsers } from '../../services/OwnerServices';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const AllUsers = () => {

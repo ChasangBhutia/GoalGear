@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import EditSquareIcon from '@mui/icons-material/EditSquare';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useAuth } from '../../context/AuthContext';
-import { addAddress, removeAddress } from '../../services/AuthServices';
+import { useUser } from '../../hooks/useUser';
 
 const ProfileAddress = () => {
-  const { user, setRefresh } = useAuth();
 
+  const {user, addUserAddress, removeUserAddress} = useUser();  
   const [addAddressSection, setAddAddressSection] = useState(false);
   const [addressDetail, setAddressDetail] = useState({
     street: '',
@@ -26,28 +25,12 @@ const ProfileAddress = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      let response = await addAddress(addressDetail);
-      alert(response.data.message);
-      setRefresh(prev=>({
-        ...prev+1
-      }))
-      if(response.data.success) setAddAddressSection(false);
-    } catch (err) {
-      console.log(err.message);
-    }
+    addUserAddress(addressDetail);
+    setAddAddressSection(false);
   }
 
    const handleRemove = async (addressId) => {
-    try {
-      let response = await removeAddress(addressId);
-      alert(response.data.message);
-       setRefresh(prev=>({
-        ...prev+1
-      }))
-    } catch (err) {
-      console.log(err.message);
-    }
+      removeUserAddress(addressId);
   }
 
 
@@ -55,9 +38,9 @@ const ProfileAddress = () => {
     <motion.article className='relative p-2 pt-0'>
       <h1 className='text-[5vw] md:text-[30px]'>My Address</h1>
       <section className='grid grid-cols-2 gap-4 my-3 xl:grid-cols-3'>
-        {user.address.map((item, index) => {
+        {user.address?.length > 0 ? user.address.map((item) => {
           return (
-            <section key={index} className='outline p-[2vw] w-1/2 rounded-lg w-full sm:p-2'>
+            <section key={item._id} className='outline p-[2vw] w-1/2 rounded-lg w-full sm:p-2'>
               <header className='flex justify-between items-center'>
                 <h2 className='text-[3vw] font-semibold md:text-[20px]'>{item.type} Address</h2>
                 <section className='flex items-center'>
@@ -71,7 +54,7 @@ const ProfileAddress = () => {
               </article>
             </section>
           )
-        })}
+        }): <p>No address added</p>}
       </section>
        <button className='bg-zinc-900 text-white rounded-4xl text-[3vw] h-[10vw] w-[40vw] sm:h-12 sm:w-80 sm:text-[20px]' onClick={()=>setAddAddressSection(true)}>Add Address</button>
       {addAddressSection && <section className='fixed inset-0 z-99 h-screen w-full flex justify-center items-center bg-[rgba(0,0,0,0.3)] flex-col'>
@@ -99,8 +82,8 @@ const ProfileAddress = () => {
             </section>
             <section className='flex gap-1 items-center text-[2.5vw] sm:text-[15px]'>
               <p>Address Type: </p>
-              <select name='type' onChange={handleChange} className='outline h-[7vw] w-[28vw] rounded w-70 sm:h-10 sm:w-50'>
-                <option selected disabled>Type</option>
+              <select name='type' onChange={handleChange} className='outline h-[7vw] w-[28vw] rounded w-70 sm:h-10 sm:w-50' defaultValue="Type">
+                <option disabled>Type</option>
                 <option value="Main">Main</option>
                 <option value="Secondary">Secondary</option>
                 <option value="Home">Home</option>

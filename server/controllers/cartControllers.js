@@ -33,23 +33,24 @@ module.exports.addToCart = async (req, res) => {
         totalPrice,
         totalDiscount
     }
-    if (!product) return res.json({ success: false, message: "Item not found!" });
+
     let user = await userModel.findOne({ email: req.user.email }).populate('cart.product'); // populate the productId for actual values
     if (!user) return res.json({ success: false, message: "Please Login first" });
 
 
     // for same product with same size in the cart instead of adding the whole product(duplicate), increase the quantity.
-    for (let item of user.cart) {
-        const isSame = item.product._id.toString() === productId && item.size === size
-        if (isSame) {
-            const { price, discount } = item.product;
-            item.quantity += Number(quantity);
-            item.totalPrice = item.quantity * price;
-            item.totalDiscount = item.quantity * discount;
-            await user.save();
-            return res.json({ success: true, message: "Product added to cart" });
-        }
-    }
+    // for (let item of user.cart) {
+    //     console.log(item);
+    //     const isSame = item.product._id.toString() === productId && item.size === size
+    //     if (isSame) {
+    //         const { price, discount } = item.product;
+    //         item.quantity += Number(quantity);
+    //         item.totalPrice = item.quantity * price;
+    //         item.totalDiscount = item.quantity * discount;
+    //         await user.save();
+    //         return res.json({ success: true, message: "Product added to cart" });
+    //     }
+    // }
 
     user.cart.push(productToAdd);
     await user.save();

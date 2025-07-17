@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
+import { useUser } from '../hooks/useUser';
 import { Squash as Hamburger } from 'hamburger-react'
 import MobileNav from './MobileNav';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -11,8 +11,7 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 const MenuBar = (props) => {
 
 
-
-    const { user } = useAuth();
+    const { user } = useUser();
     const { cartQuantity } = useCart();
     const [openMenu, setOpenMenu] = useState(false);
     const [adminDropDown, setAdminDropDown] = useState(false);

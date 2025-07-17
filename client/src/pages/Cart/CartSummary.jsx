@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { createOrder } from '../services/CartServices';
+import { createOrder } from '../../services/CartServices';
 const CartSummary = ({ summary }) => {
 
     const [paymentSuccess, setPaymentSuccess] = useState(false);

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { useAuth } from '../../context/AuthContext';
+import React, { useState } from 'react'
+import { useUser } from '../../hooks/useUser';
 import {motion} from 'framer-motion';
 
 const ProfileDetails = () => {
 
-    const { user, uploadProfilImage } = useAuth();
+    const { user, uploadProfilImage } = useUser();
 
     const [uploadForm, setUploadForm] = useState(false);
     const [image, setImage] = useState({});

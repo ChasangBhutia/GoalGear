@@ -1,19 +1,16 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion';
-import juggling from '../assets/juggling.gif'
 import { useAuth } from '../context/AuthContext';
 
 const LoginSignup = () => {
 
-    const { CheckOtp, fetchOtp, errorMessage, registerUser, loginUser } = useAuth();
+    const { otpVerification, CheckOtp, fetchOtp, errorMessage, registerUser, loginUser } = useAuth();
     const [otpSection, setOtpSection] = useState(true);
     const [haveAccount, setHaveAccount] = useState(false);
-    const [authError, setAuthError] = useState('');
     const [userData, setUserData] = useState(
         haveAccount ? {
             email: '',
-            password: '',
-            otp: ''
+            password: ''
         } : {
             fullname: '',
             email: '',
@@ -40,9 +37,8 @@ const LoginSignup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        CheckOtp(userData.email, userData.otp);
+        !haveAccount && CheckOtp(userData.email, userData.otp);
         haveAccount ? loginUser(userData) : registerUser(userData);
-        setAuthError(errorMessage);
     }
 
 
@@ -55,11 +51,15 @@ const LoginSignup = () => {
                 <form className='flex flex-col gap-2 justify-center text-[3vw] sm:text-[20px]' onSubmit={handleSubmit}>
                     {!haveAccount && <input className='bg-zinc-100 ps-2 rounded-lg h-[10vw] w-full sm:h-15' type="text" onChange={handleChange} value={userData.fullname} name='fullname' placeholder='Fullname' required />}
                     <input className='bg-zinc-100 ps-2 rounded-lg h-[10vw] w-full sm:h-15' type="email" name='email' onChange={handleChange} value={userData.email} placeholder='Email' required />
-                    {(!otpSection && !haveAccount) && <input className='bg-zinc-100 ps-2 rounded-lg h-[10vw] w-full sm:h-15' type="number" name='otp' onChange={handleChange} value={userData.otp} placeholder='Enter your OTP' required />}
+                    {(!otpSection && !haveAccount) && <section className='flex gap-2'><input className='bg-zinc-100 ps-2 rounded-lg h-[10vw] w-full sm:h-15' type="number" name='otp' onChange={handleChange} value={userData.otp} placeholder='Enter your OTP' required /> <span>{otpVerification ? 'Verified' : 'Not Verified'}</span></section>}
                     {(!otpSection || haveAccount) && <input className='bg-zinc-100 ps-2 rounded-lg h-[10vw] w-full sm:h-15' type="password" name='password' onChange={handleChange} value={userData.password} placeholder={haveAccount ? 'Password' : 'Create Password'} required />}
                     {(otpSection && !haveAccount) ? <input className='bg-[#F6E20C] rounded-lg h-[12vw] w-full bg-[#F6E20C] sm:h-15' type="submit" value='Send OTP' onClick={getOtp} /> : <input className='bg-[#F6E20C] rounded-lg h-[10vw] w-full bg-[#F6E20C] text-[4vw] sm:h-15 sm:text-[20px]' type="submit" value={haveAccount ? 'Login' : 'Create Account'} />}
                 </form>
-                <p className='text-center text-red-500'>{authError}</p>
+                {Array.isArray(errorMessage)
+                    ? errorMessage.map((msg, i) => (
+                        <p key={i} className="text-red-600 text-sm">{msg}</p>
+                    ))
+                    : errorMessage && <p className="text-red-600 text-sm">{errorMessage}</p>}
                 <button className='mt-7 z-99 text-[3vw] sm:text-[20px]' onClick={() => setHaveAccount(!haveAccount)}>{haveAccount ? "Don't have an account? Create" : "Already Registered? Login"}</button>
 
             </motion.section>

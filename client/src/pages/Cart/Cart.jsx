@@ -1,6 +1,6 @@
-import CartProducts from "../components/CartProducts"
-import CartSummary from "../components/CartSummary";
-import {useCart} from '../context/CartContext'
+import CartProducts from "./CartProducts"
+import CartSummary from "./CartSummary";
+import {useCart} from '../../context/CartContext'
 
 const Cart = () => {
     const{cart, cartQuantity, removeProduct, cartSummary} = useCart();

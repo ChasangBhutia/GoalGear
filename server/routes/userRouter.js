@@ -10,10 +10,10 @@ router.get('/', (req, res)=>{
     res.send("Its working");
 })
 
-router.get('/get-user',isLoggedIn, getUser);
-router.put('/upload-profile-image',upload.single('image'), isLoggedIn, isUser, uploadProfileImage)
-router.post('/add-address', isLoggedIn, isUser, addAddress);
-router.delete('/remove-address/:addressId', isLoggedIn, isUser, deleteAddress);
+router.get('/profile',isLoggedIn, getUser);
+router.put('/profile/image',upload.single('image'), isLoggedIn, isUser, uploadProfileImage)
+router.post('/profile/address', isLoggedIn, isUser, addAddress);
+router.delete('/profile/address/:addressId', isLoggedIn, isUser, deleteAddress);
 
 // Cart APIs
 router.get('/cart', isLoggedIn, isUser, getCart);

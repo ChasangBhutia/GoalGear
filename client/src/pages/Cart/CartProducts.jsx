@@ -36,7 +36,7 @@ const CartProducts = ({ cart, cartQuantity, removeFromCart }) => {
                     </tbody>
 
                 </table>
-                : <h2 className='text-[4vw] mt-3'>No items</h2>}
+                : <h2 className='text-[4vw] mt-3 md:text-[30px]'>No items</h2>}
         </div>
     )
 }

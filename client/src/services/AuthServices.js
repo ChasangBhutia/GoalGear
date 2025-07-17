@@ -19,19 +19,3 @@ export const login = (userData)=>{
 export const logout = ()=>{
     return api.get('api/auth/logout');
 }
-
-export const uploadImage = (userImage)=>{
-    return api.put('api/user/upload-profile-image', userImage);
-}
-
-export const addAddress = (addressDetail)=>{
-    return api.post('api/user/add-address', addressDetail);
-}
-
-export const removeAddress = (addressId)=>{
-    return api.delete(`api/user/remove-address/${addressId}`)
-}
-
-export const getUser = ()=>{
-    return api.get('api/user/get-user');
-}

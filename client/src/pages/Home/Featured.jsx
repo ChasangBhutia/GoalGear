@@ -1,7 +1,7 @@
 import React from 'react'
-import ronaldo from '../assets/ronaldo.jpg'
-import messi from '../assets/messi.jpg'
-import neymar from '../assets/neymar.jpg'
+import ronaldo from '../../assets/ronaldo.jpg'
+import messi from '../../assets/messi.jpg'
+import neymar from '../../assets/neymar.jpg'
 import {motion} from 'framer-motion'
 
 

@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
-import Navbar from './Navbar'
-import ronaldoImg from "../assets/ronaldoHero.png";
+
+import Navbar from '../../components/Navbar'
+import ronaldoImg from "../../assets/ronaldoHero.png";
 import { motion } from 'framer-motion';
-import adidasLogo from '../assets/adidas.jpg';
-import nikeLogo from '../assets/nike.jpg';
-import pumaLogo from '../assets/puma.jpg';
-import niviaLogo from '../assets/nivia.jpg';
-import background from "../assets/background.png"
-import "./styles/style.css";
+import adidasLogo from '../../assets/adidas.jpg';
+import nikeLogo from '../../assets/nike.jpg';
+import pumaLogo from '../../assets/puma.jpg';
+import niviaLogo from '../../assets/nivia.jpg';
+import background from "../../assets/background.png"
+import "../../components/styles/style.css";
 import { useLocation } from 'react-router-dom';
-import ProtectedRoutes from '../utils/ProtectedRoutes';
+import ProtectedRoutes from '../../utils/ProtectedRoutes';
 
 
 const Hero = () => {

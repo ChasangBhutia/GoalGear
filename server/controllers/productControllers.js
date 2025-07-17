@@ -32,7 +32,6 @@ module.exports.createProduct = async (req, res) => {
         price,
         discount,
         image: req.file.filename,
-        price,
         category
     });
     // storing all the products as ID show that all products record are managable by owner

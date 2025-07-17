@@ -1,5 +1,5 @@
-import ProductCard from './ProductCard';
-import { useProduct } from '../hooks/useProduct';
+import ProductCard from '../../components/ProductCard';
+import { useProduct } from '../../hooks/useProduct';
 
 
 const NewlyAdded = () => {
