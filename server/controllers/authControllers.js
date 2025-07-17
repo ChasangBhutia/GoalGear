@@ -56,8 +56,8 @@ module.exports.login = async (req, res) => {
     if (!email || !password) return res.json({ success: false, errors: "All fields are required" });
 
     //find user in both user and owner model and give them the role accordingly
-    var user = await userModel.findOne({ email });
-    var role = "user";
+    let user = await userModel.findOne({ email });
+    let role = "user";
     if (!user) {
         user = await ownerModel.findOne({ email });
         role = "admin";
