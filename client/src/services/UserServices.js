@@ -1,7 +1,11 @@
 import api from "./api";
 
 export const uploadImage = (userImage) => {
-    return api.put('api/user/profile/image', userImage);
+    return api.put('api/user/profile/image', userImage,{
+        headers:{
+            'Content-Type':'multipart/form-data'
+        }
+    });
 }
 
 export const addAddress = (addressDetail) => {
