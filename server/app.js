@@ -8,16 +8,16 @@ const app = express();
 
 const PORT = process.env.PORT;
 
-app.use(express.json());
-app.use(express.static('public'));
-app.use(express.urlencoded({extended:true}));
-app.use('/uploads', express.static(path.join(__dirname,'uploads')));
-app.use(cookieParser());
 app.use(cors({
     origin:'https://goal-gear.vercel.app',
     credentials:true,
     methods: ['GET','POST','DELETE','PUT']
 }));
+app.use(express.json());
+app.use(express.static('public'));
+app.use(express.urlencoded({extended:true}));
+app.use('/uploads', express.static(path.join(__dirname,'uploads')));
+app.use(cookieParser());
 
 const ConnectDB = require('./config/db');
 const ownerRouter = require('./routes/ownerRouter')
