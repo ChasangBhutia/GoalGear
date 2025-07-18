@@ -8,11 +8,19 @@ const app = express();
 
 const PORT = process.env.PORT;
 
+const allowedOrigins = ['https://goal-gear.vercel.app'];
+
 app.use(cors({
-    origin:'https://goal-gear.vercel.app',
-    credentials:true,
-    methods: ['GET','POST','DELETE','PUT']
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 }));
+
 app.use(express.json());
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
