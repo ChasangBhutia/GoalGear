@@ -40,6 +40,8 @@ export const AuthProvider = ({ children }) => {
         try {
             let response = await register(userData);
             if (response?.data?.success) {
+                const token = response.data.token;
+                localStorage.setItem('token', token);
                 setRefresh(refresh + 1);
                 navigate('/');
             }
@@ -66,6 +68,8 @@ export const AuthProvider = ({ children }) => {
         try {
             let response = await login(userData);
             if (response?.data?.success) {
+                const token = response.data.token;
+                localStorage.setItem('token', token);
                 setRefresh(refresh + 1);
                 navigate('/');
             } else {

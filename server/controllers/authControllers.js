@@ -41,7 +41,7 @@ module.exports.registerUser = async (req, res) => {
             sameSite: 'None',
             maxAge: 30 * 24 * 60 * 60 * 1000
         });
-        return res.status(201).json({ success: true, message: "Account created!" });
+        return res.status(201).json({ success: true, message: "Account created!", token });
     } catch (err) {
         if (err.name === "ValidationError") {
             const errors = Object.values(err.errors).map(e => e.message);
@@ -76,7 +76,7 @@ module.exports.login = async (req, res) => {
                 sameSite: 'None',
                 maxAge: 30 * 24 * 60 * 60 * 1000
             });
-            return res.json({ success: true, message: "Logged In" });
+            return res.json({ success: true, message: "Logged In", token });
         }
     })
 }

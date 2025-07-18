@@ -1,15 +1,24 @@
-import { Navigate } from 'react-router-dom'
-import Cookies from 'js-cookie';
+import { Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import React from 'react';
 
-const ProtectedRoutes = ({children}) => {
+const ProtectedRoutes = ({ children }) => {
+  const token = localStorage.getItem('token');
+  const user = token ? jwtDecode(token) : null;
 
-    const token=Cookies.get("token");
-    const user = token ? jwtDecode(token) : null;
-    if(!token) return <Navigate to="/login" replace/>
+  if (!token || !user) {
+    return <Navigate to="/login" replace />;
+  }
 
-  return React.cloneElement(children, {user})
-}
+  // Optionally, you can check for token expiration
+  const currentTime = Math.floor(Date.now() / 1000); // current time in seconds
+  if (user.exp < currentTime) {
+    localStorage.removeItem('token'); // remove expired token
+    return <Navigate to="/login" replace />;
+  }
 
-export default ProtectedRoutes
+  // Pass decoded user as a prop to the protected component
+  return React.cloneElement(children, { user });
+};
+
+export default ProtectedRoutes;
