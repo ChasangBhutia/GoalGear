@@ -36,7 +36,7 @@ module.exports.registerUser = async (req, res) => {
         await newUser.save();
         let token = generateToken(newUser.email, "user");
         res.cookie("token", token, {
-            httpOnly: true,
+            httpOnly: false,
             secure: true,
             sameSite: 'None',
             maxAge: 30 * 24 * 60 * 60 * 1000
