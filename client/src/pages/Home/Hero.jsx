@@ -10,6 +10,7 @@ import background from "../../assets/background.png"
 import "../../components/styles/style.css";
 import { useLocation } from 'react-router-dom';
 import ProtectedRoutes from '../../utils/ProtectedRoutes';
+import { HashLink } from 'react-router-hash-link';
 
 
 const Hero = () => {
@@ -26,14 +27,14 @@ const Hero = () => {
             <section className='w-full text-center h-[20%] sm:mt-2 lg:mt-10'>
               <h1 id='landingFont' className='text-[6vw] tracking-wider lg:text-[4.5vw]' style={{ fontFamily: '"Bebas Neue' }}>Gear Up Like A Pro</h1>
               <h3 className='text-[3vw] w-[70vw] m-auto font-light sm:text-[2vw] sm:w-100 lg:w-[40vw] lg:text-[1.5vw]'>Shop Authentic Football Kits From Top Clubs & National Teams</h3>
-              <a className='' href="#newlyAdded">
+              <HashLink smooth to="/#newlyAdded">
                 <button className='z-90 relative w-[40vw] h-[7vw] text-[3.5vw] rounded-xl text-white bg-zinc-900 sm:w-40 sm:h-10 sm:text-sm sm:mt-4'>Explore</button>
-              </a>
+              </HashLink>
             </section>
             <section className='flex flex-col-reverse mt-[10vw] sm:flex-row sm:p-2 sm:items-center sm:mt-10 lg:px-4 lg:mt-10 xl:px-20 xl:mt-10 '>
               <aside className='flex-1 w-[80vw] hidden m-auto sm:block sm:w-1/3'>
                 <p className='w-full text-[2vw] text-left mb-2 md:text-sm lg:text-lg'>We bring you authentic football kits from top clubs and national teams, designed for fans who live the game. Wear your passion. Represent your team. Play bold, feel unstoppable.</p>
-                <a href="#featured"><button className='h-[3vw] rounded-3xl w-[13vw] outline text-zinc-900 hover:bg-zinc-900 hover:text-white text-[1.5vw]'>Featured</button></a>
+                <HashLink smooth to="/#featured"><button className='h-[3vw] rounded-3xl w-[13vw] outline text-zinc-900 hover:bg-zinc-900 hover:text-white text-[1.5vw]'>Featured</button></HashLink>
               </aside>
               <aside className='flex justify-center sm:w-1/3'>
                 <motion.img key={location.pathname} className='ronaldoImg relative h-130 sm:h-100 xl:h-140' initial={{ bottom: '10px', opacity: 0.5 }} whileInView={{ bottom: '-50px', opacity: 1 }} transition={{ duration: 1 }} src={ronaldoImg} alt="" />
