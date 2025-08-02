@@ -4,7 +4,7 @@ module.exports.uploadProfileImage = async (req, res) => {
     // find the user and update the image value in the database
     await userModel.findOneAndUpdate(
         { email: req.user.email },
-        { $set: { image: req.file.filename } },
+        { $set: { image: req.file.path, image_id: req.file.filename } },
         { new: true }
     );
     res.json({ success: true, message: "Image Uploaded" });

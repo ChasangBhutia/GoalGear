@@ -2,14 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
-const ProductCard = (props) => {
+const ProductCard = ({ id, imgUrl, name, price }) => {
   return (
-    <Link to={`/product/${props.id}`}>
+    <Link to={`/product/${id}`}>
       <motion.article className='flex flex-col h-[40vw] w-[25vw] text-left mx-2 md:h-80 md:w-50 lg:mt-5 xl:mx-5' initial={{ opacity: 0, scale: 0.5 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} viewport={{ once: false }}>
-          <img className='h-[70%] w-full' src={`https://goalgear-l3iw.onrender.com/uploads/${props.imgUrl}`} alt={`${props.name} image`} />
+        <img className='h-[70%] w-full' src={`${imgUrl}`} alt={`${name}`} />
         <section className='h-[20%] leading-snug'>
-          <h3 className='text-[2.5vw] leading-snug md:text-[2vw] lg:text-[20px]'>{props.name}</h3>
-          <p className={`mr-1 text-[2vw] leading-snug md:text-[1.5vw] lg:text-sm`}>Price: ₹{props.price}</p>
+          <h3 className='text-[2.5vw] leading-snug md:text-[2vw] lg:text-[20px]'>{name}</h3>
+          <p className={`mr-1 text-[2vw] leading-snug md:text-[1.5vw] lg:text-sm`}>Price: ₹{price}</p>
         </section>
       </motion.article>
     </Link>

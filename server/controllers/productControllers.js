@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const productModel = require("../models/product-model");
 const ownerModel = require("../models/owner-model");
-const path = require('path');
+const cloudinary = require('../config/cloudinary');
 
 
 module.exports.getAllProducts = async(req, res)=>{
@@ -31,7 +31,8 @@ module.exports.createProduct = async (req, res) => {
         name,
         price,
         discount,
-        image: req.file.filename,
+        image: req.file.path,
+        image_id: req.file.filename,
         category
     });
     // storing all the products as ID show that all products record are managable by owner
@@ -44,22 +45,14 @@ module.exports.deleteProduct = async (req, res) => {
     const { productId } = req.params;
     let owner = await ownerModel.findOne({email:req.user.email}); 
     const product = await productModel.findById(productId);
-    
-    const imagePath = path.join('uploads',product.image);
-    //filtering the owner products so that there are only products having id which is not same as deleted ones'.
     owner.products = owner.products.filter(p=>p.toString()!==productId);
+
+    await cloudinary.uploader.destroy(product.image_id);
 
     // deleting the product from prooduct model
     await productModel.deleteOne({ _id: productId });
     await owner.save();
-    // remove the image from the uploads directory at server
-    fs.unlink(imagePath, (err) => {
-      if (err) {
-        console.error('Error deleting image file:', err);
-      } else {
-        console.log('Image deleted successfully:', product.image);
-      }
-    });
+  
     res.json({success:true, message:"Product Deleted."});
 }
 

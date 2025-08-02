@@ -54,7 +54,7 @@ const Navbar = (props) => {
                             <span className='absolute left-[13px] top-[12px] text-[15px]'>{cartQuantity}</span>
                         </li></Link>}
                         <Link to="/user"><li>
-                            <img className='h-[4vw] w-[4vw] rounded-[100%] lg:h-10 lg:w-10' src={`https://goalgear-l3iw.onrender.com/uploads/${user.image}`} alt="" />
+                            <img className='h-[4vw] w-[4vw] rounded-[100%] lg:h-10 lg:w-10' src={`${user.image}`} alt="" />
                         </li>
                         </Link>
                     </section>

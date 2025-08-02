@@ -31,7 +31,7 @@ const ProductDisplay = ({ product, role }) => {
   return (
     <section className='h-[40vw] w-[80vw] m-auto mt-20 mb-30 flex flex-col gap-2 sm:w-140 sm:h-100'>
       <article className=' flex gap-2 sm:gap-5 '>
-        <img className='rounded-lg h-full w-[30vw] sm:w-60 sm:h-70' src={`https://goalgear-l3iw.onrender.com/uploads/${product.image}`} alt="" />
+        <img className='rounded-lg h-full w-[30vw] sm:w-60 sm:h-70' src={`${product.image}`} alt={`${product.name}`} />
         <section className='flex flex-col gap-[1vw] w-1/2 leading-tight'>
           <h2 className='text-[4vw] leading-tight sm:text-[26px]'>{product.name}</h2>
           <section className='leading-tight text-[2.4vw] sm:text-[15px]'>

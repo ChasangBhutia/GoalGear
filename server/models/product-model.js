@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 3,
-        maxlength: 25,
+        maxlength: 40,
     },
     price: {
         type: Number,
@@ -18,6 +18,8 @@ const productSchema = new mongoose.Schema({
         min : [0, 'Discount cannot be negative']
     },
     image: String,
+    image_id:String,
+    imagePublicId:String,
     category: {
         type: String,
         enum: ['jerseys', 'boots', 'gloves', 'bags', 'socks', 'guards']

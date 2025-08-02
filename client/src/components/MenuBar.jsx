@@ -63,7 +63,7 @@ const MenuBar = (props) => {
                     </Link>
                 </li>}
                 <li>
-                    <Link to="/user"><img className='h-10 w-10 rounded-[100%]' src={`https://goalgear-l3iw.onrender.com/uploads/defaultUserProfilePic.jpg`} alt="" /></Link>
+                    <Link to="/user"><img className='h-10 w-10 rounded-[100%]' src={`${user.image}`} alt="" /></Link>
                 </li>
 
             </ul>

@@ -24,8 +24,9 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default: 'defaultUserProfilePic.jpg'
+        default: 'https://res.cloudinary.com/dzjspl6ws/image/upload/v1754150232/defaultUserProfilePic_lx62o9.jpg'
     },
+    image_id:String,
     mobile: {
         type: String,
         default: '0000000000'
