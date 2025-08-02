@@ -24,7 +24,7 @@ const CartProducts = ({ cart, cartQuantity, removeFromCart }) => {
                             return (
                                 <tr key={index} className='text-[2.5vw] md:text-[20px]'>
                                     <td className='px-[4vw] py-3'><p>{index + 1}</p></td>
-                                    <td className='py-3'><img className='h-16 md:h-20' src={`https://goalgear-l3iw.onrender.com/uploads/${item.product.image}`} alt={item.product.name} /></td>
+                                    <td className='py-3'><img className='h-16 md:h-20' src={`${item.product.image}`} alt={item.product.name} /></td>
                                     <td className='px-[4vw] py-3'><h3>{item.product.name}</h3></td>
                                     <td className='px-[4vw] py-3'><p>₹{item.product.price}</p></td>
                                     <td className='px-[4vw] py-3'><p>{item.size}</p></td>
