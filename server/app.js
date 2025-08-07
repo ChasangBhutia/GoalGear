@@ -8,9 +8,7 @@ const app = express();
 
 const PORT = process.env.PORT;
 
-// https://goal-gear.vercel.app
-
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['https://goal-gear.vercel.app'];
 
 app.use(cors({
   origin: function (origin, callback) {
