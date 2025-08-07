@@ -30,7 +30,14 @@ export const AuthProvider = ({ children }) => {
     const fetchOtp = async (email) => {
         try {
             let response = await getOtp(email);
-            alert(response.data.message);
+            if(!response.data.success){
+                setErrorMessage(response?.data?.errors);
+                setTimeout(()=>{
+                    setErrorMessage('');
+                },5000)
+            }else{
+                alert(response.data.message);
+            }
         } catch (err) {
             console.log(err.message);
         }
@@ -76,7 +83,7 @@ export const AuthProvider = ({ children }) => {
                 setErrorMessage(response?.data?.errors);
                 setTimeout(() => {
                     setErrorMessage('');
-                }, 5000);
+                }, 3000);
             }
         } catch (err) {
             console.log(err?.message);

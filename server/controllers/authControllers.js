@@ -100,13 +100,16 @@ module.exports.getUser = async (req, res) => {
 }
 
 module.exports.sendOtp = async (req, res) => {
-    const otp = generateOtp();
     const { email } = req.body;
     if (!email) return res.json({ success: false, errors: "Please enter an email" });
 
+    let user = await userModel.findOne({email});
+    if(user) return res.json({success:false, errors:"User already exist please login."})
+
+    const otp = generateOtp();
+    try {
     // create an expiring time for the otp which is of 10 mins
     const expiresAt = Date.now() + 10 * 60 * 1000; // 10 mins - current time + 10 mins
-    try {
         // delete the user with the email provided so that all the previous otp are removed and fresh new otp is stored 
         await Otp.deleteMany({ email });
         //fresh otp stored

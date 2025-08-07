@@ -1,7 +1,9 @@
 import axios from "axios";
 
+//https://goalgear-l3iw.onrender.com
+
 const api = axios.create({
-    baseURL:'https://goalgear-l3iw.onrender.com',
+    baseURL:'http://localhost:3000',
     withCredentials:true
 })
 
